@@ -6,8 +6,8 @@ import Hero from '@/components/Hero';
 
 
 export const metadata = {
-    title: 'Your Website Title',
-    description: 'Your website description',
+    title: 'Peros',
+    description: 'Peanut Butter Ecommerce Website',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

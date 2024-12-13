@@ -13,7 +13,7 @@ const Navbar = () => {
           alt="Peros Logo"
           width={190}
           height={150}
-          href="/Home"
+          href="/home"
         />
       </div>
 

@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({ buttonLink, buttonText, className }) =>
     <a
       href={buttonLink}
       className={clsx(
-        "inline-block px-4 py-2 rounded-lg text-white bg-rose-600 hover:bg-orange-700 font-bold text-xl uppercase tracking-wide transition duration-300 mt-4 md:text2xl",
+        "inline-block px-4 py-2 rounded-lg text-white bg-green-400 hover:bg-orange-800 font-bold text-xl uppercase tracking-wide transition duration-300 mt-4 md:text2xl",
         className
       )}
     >

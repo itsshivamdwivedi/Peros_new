@@ -1,36 +1,46 @@
 "use client";
 
-import { SpotLight } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React from 'react';
+import { View } from "@react-three/drei";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import Scene from "./Hero/Scene";
+
+const Loader = dynamic(
+  () => import("@react-three/drei").then((mod) => mod.Loader),
+  { ssr: false },
+);
 
 type Props = {};
 
 export default function ViewCanvas({}: Props) {
   return (
-    <Canvas
-    style={
-      {
-        position: "fixed",
-        top: 0,
-        left: "50%",
-        transform: "translateX(-50%)",
-        overflow:"hidden",
-        pointerEvents:"none",
-        zIndex:30,
-
-      }
-    }
-    >
-     
-      
-      <mesh rotation={[0.5,0.5,0]} position={[1,0,0]}>
-        <boxGeometry /> 
-        <meshStandardMaterial color={"hotpink"} />
-       
-      </mesh>
-      <ambientLight intensity={2} />
-      <SpotLight intensity={3} position={[1,1,1]} />
-    </Canvas>
+    <>
+      <Canvas
+        style={{
+          position: "fixed",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          overflow: "hidden",
+          
+          zIndex:-10,
+        }}
+        shadows
+        dpr={[1, 1.5]}
+        gl={{ antialias: true }}
+        camera={{
+          fov: 75,
+          position: [0, 2, 5],
+          near: 0.1,
+          // far: 1000,
+        }}
+      >
+        <Suspense fallback={null}>
+         <View.Port />
+        </Suspense>
+      </Canvas>
+      <Loader />
+    </>
   );
 }

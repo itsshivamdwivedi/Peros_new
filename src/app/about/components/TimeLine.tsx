@@ -1,106 +1,72 @@
-// src/components/App.tsx
+// Timeline.js
+"use client";
 import React from "react";
+import Head from "next/head";
+import "./Timeline-Wrapper.css";
 
-import timelineElements from "./TimeLineText";
-import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
-import 'react-vertical-timeline-component/style.min.css';
-import "../../assets/styles/timeline.css"; // Correctly import the CSS file
+const Timeline = () => {
+  const timelineData = [
+    {
+      image: "/assets/about-images/healthy.png", // Image source path
+      number: 1,
+      title: "Healthy",
+      details: "Lorem ipsum dolor sit amet conse adipisicing elit. Dicta vitae voluptates id hic recusandae omnis cupiditate odit quis, assumenda optio?",
+    },
+    {
+      image: "/assets/about-images/creativity.png", // Image source path
+      number: 2,
+      title: "Creativity",
+      details: "Lorem ipsum dolor sit amet conse adipisicing elit. Dicta vitae voluptates id hic recusandae omnis cupiditate odit quis, assumenda optio?",
+    },
+    {
+      image: "/assets/about-images/exclusive.png", // Image source path
+      number: 3,
+      title: "Exclusive",
+      details: "Lorem ipsum dolor sit amet conse adipisicing elit. Dicta vitae voluptates id hic recusandae omnis cupiditate odit quis, assumenda optio?",
+    },
+    {
+      image: "/assets/about-images/high-quality.png", // Image source path
+      number: 4,
+      title: "Compass",
+      details: "Lorem ipsum dolor sit amet conse adipisicing elit. Dicta vitae voluptates id hic recusandae omnis cupiditate odit quis, assumenda optio?",
+    },
+    {
+      image: "/assets/about-images/organic.png", // Image source path
+      number: 5,
+      title: "100% Organic",
+      details: "Lorem ipsum dolor sit amet conse adipisicing elit. Dicta vitae voluptates id hic recusandae omnis cupiditate odit quis, assumenda optio?",
+    },
+  ];
 
-function TimeLine() {
-    <div>
-    <VerticalTimeline>
-    <VerticalTimelineElement
-      className="vertical-timeline-element--work"
-      contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-      date="2011 - present"
-      iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      icon={<WorkIcon />}
-    >
-      <h3 className="vertical-timeline-element-title">Creative Director</h3>
-      <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-      <p>
-        Creative Direction, User Experience, Visual Design, Project Management, Team Leading
-      </p>
-    </VerticalTimelineElement>
-    <VerticalTimelineElement
-      className="vertical-timeline-element--work"
-      date="2010 - 2011"
-      iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      icon={<WorkIcon />}
-    >
-      <h3 className="vertical-timeline-element-title">Art Director</h3>
-      <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
-      <p>
-        Creative Direction, User Experience, Visual Design, SEO, Online Marketing
-      </p>
-    </VerticalTimelineElement>
-    <VerticalTimelineElement
-      className="vertical-timeline-element--work"
-      date="2008 - 2010"
-      iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      icon={<WorkIcon />}
-    >
-      <h3 className="vertical-timeline-element-title">Web Designer</h3>
-      <h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
-      <p>
-        User Experience, Visual Design
-      </p>
-    </VerticalTimelineElement>
-    <VerticalTimelineElement
-      className="vertical-timeline-element--work"
-      date="2006 - 2008"
-      iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-      icon={<WorkIcon />}
-    >
-      <h3 className="vertical-timeline-element-title">Web Designer</h3>
-      <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
-      <p>
-        User Experience, Visual Design
-      </p>
-    </VerticalTimelineElement>
-    <VerticalTimelineElement
-      className="vertical-timeline-element--education"
-      date="April 2013"
-      iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-      icon={<SchoolIcon />}
-    >
-      <h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
-      <h4 className="vertical-timeline-element-subtitle">Online Course</h4>
-      <p>
-        Strategy, Social Media
-      </p>
-    </VerticalTimelineElement>
-    <VerticalTimelineElement
-      className="vertical-timeline-element--education"
-      date="November 2012"
-      iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-      icon={<SchoolIcon />}
-    >
-      <h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
-      <h4 className="vertical-timeline-element-subtitle">Certification</h4>
-      <p>
-        Creative Direction, User Experience, Visual Design
-      </p>
-    </VerticalTimelineElement>
-    <VerticalTimelineElement
-      className="vertical-timeline-element--education"
-      date="2002 - 2006"
-      iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-      icon={<SchoolIcon />}
-    >
-      <h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
-      <h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
-      <p>
-        Creative Direction, Visual Design
-      </p>
-    </VerticalTimelineElement>
-    <VerticalTimelineElement
-      iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
-      icon={<StarIcon />}
-    />
-  </VerticalTimeline>
-    </div>
+  return (
+    <>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+      </Head>
+      <h1 className="text-center text-3xl font-semibold mt-10 mb-10"> Our Values</h1>
+      <div className="timeline-wrapper">
+       
+        <div className="timeline-container">
+          {timelineData.map((point, index) => (
+            <div className="timeline-point" key={index}>
+              {/* Add img tag for images */}
+              <img src={point.image} alt={point.title} className="timeline-image" />
+              <div className="popup">
+                <div className="popup-number">{point.number}</div>
+                <div className="popup-details text">
+                  <div className="popup-title">{point.title}</div>
+                  {point.details}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
 
-
-export default TimeLine;
+export default Timeline;

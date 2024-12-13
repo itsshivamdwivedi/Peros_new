@@ -3,10 +3,13 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-function Model(props) {
+
+
+
+function BackUpJar(props) {
   const { nodes, materials } = useGLTF('/backup.gltf')
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} >
       <group
         position={[0, 1.141, 0]}
         rotation={[1.578, -0.026, -1.295]}
@@ -40,5 +43,5 @@ function Model(props) {
   )
 }
 
-export default Model;
+export default BackUpJar;
 useGLTF.preload('/backup.gltf')

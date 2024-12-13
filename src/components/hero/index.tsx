@@ -10,6 +10,9 @@ import Button from "../Button";
 import { useGSAP } from "@gsap/react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { View } from "@react-three/drei";
+
+import Scene from "./Scene";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,31 +25,8 @@ const Hero: React.FC = () => {
     });
   }, []);
   useGSAP(() => {
-    const colors = [
-      "#e1eaee", 
-      "#D9F99D", 
-      "#FFD166",
-      "#EF476F",
-    ];
+ 
 
-    const sections = gsap.utils.toArray<HTMLElement>(".fold");
-    sections.forEach((section, index) => {
-      gsap.fromTo(
-        "body", 
-        {
-          backgroundColor: colors[index],
-        },
-        {
-          backgroundColor: colors[index + 1] || colors[index], 
-          scrollTrigger: {
-            trigger: section,
-            start: "top center", 
-            end: "bottom center", 
-            scrub: true,
-          },
-        }
-      );
-    });
     const introTl = gsap.timeline();
     introTl
       .set(".hero", { opacity: 1 })
@@ -85,17 +65,14 @@ const Hero: React.FC = () => {
     });
 
     scrollTl
-    .fromTo(
+    .from(
         "body",
         {
           backgroundColor: "#e1eaee",
-        },
-        {
-          backgroundColor: "#D9F99D",
-          overwrite: "auto",
-        },
+        }
+      
         
-        1,
+        ,
       )
     
     
@@ -115,10 +92,18 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <Bounded className="hero">
-      <section className="grid h-90 w-88 place-items-center overflow-hidden">
-        <div className="grid auto-rows-min place-items-center text-center">
-          <h1 className="hero-header-word lg:text-[7rem] text-6xl font-black uppercase leading-[.8] text-orange-500 md:text-[7rem] mt-8">
+    <Bounded>
+     <View className="hero-scene sticky top-0 z-50 -mt-[100vh] hidden h-screen
+      w-screen md:block"
+      >
+      <Scene />
+     </View>
+
+
+      <section className="grid  w-88 place-items-center overflow-hidden">
+        <div className="hero">  
+        <div className="grid h-screen auto-rows-min place-items-center text-center">
+          <h1 className="hero-header-word lg:text-[7rem] text-6xl font-black uppercase leading-[.8] text-green-500 md:text-[7rem] mt-8">
             <TextSplitter
               text="SURVIVAL OF FITTEST"
               wordDisplayStyle="block"
@@ -145,7 +130,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Second Fold */}
-        <div className="grid text-side hero-body h-screen items-center gap-4 md:grid-cols-2 mt-20">
+        <div className="grid text-side hero-body h-96 items-center gap-4 md:grid-cols-2 mt-20">
           <div className="text-side-heading text-balance text-4xl font-black uppercase text-sky-950 lg:text-6xl" data-aos="fade-left">
             <TextSplitter
               text="Health, Quality, Transformation"
@@ -160,18 +145,23 @@ const Hero: React.FC = () => {
             </div>
           </div>
           <div className="image-side flex justify-center items-center" data-aos="fade-right">
-            <Image
+            {/* <Image
               src="/assets/home-images/second-fold.jpeg"
               alt="Peanut Butter"
               className="rounded-lg shadow-lg"
               width={500} 
               height={300}
               priority 
-            />
+            /> */}
           </div>
         </div>
+        </div>
 
-        <div className="grid third-fold  h-screen items-center gap-6 md:grid-cols-2" >
+       
+       
+
+      </section>
+      {/* <div className="grid third-fold  h-screen items-center gap-6 md:grid-cols-2" >
           <div className="image-side flex justify-center items-center" data-aos="fade-right">
             <Image
               src="/assets/home-images/usp.jpg"
@@ -196,9 +186,9 @@ const Hero: React.FC = () => {
             </div>
           </div>
         </div> 
-        {/* Fourth Fold */}
-        <div
-          className="grid fourth-fold h-screen items-center gap-6 md:grid-cols-2"
+       
+         <div
+          className="grid fourth-fold h-96 items-center gap-6 md:grid-cols-2"
           data-aos="fade-up"
         >
           <div className="text-side" data-aos="slide-right" data-aos-delay="300"
@@ -229,9 +219,7 @@ const Hero: React.FC = () => {
               priority
             />
           </div>
-        </div>
-
-      </section>
+        </div> */}
     </Bounded>
   );
 };

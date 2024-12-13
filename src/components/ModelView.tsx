@@ -29,7 +29,7 @@ const ModelView: React.FC = () => {
       {/* Model */}
       <Suspense fallback={<Html>Loading...</Html>}>
         <BackUpJar
-          scale={[1.7, 1.7, 1.7]}
+          scale={[0.2, 0.2, 0.2]}
           position={[0, -1, 0]}
           rotation={[0, Math.PI * 1.3, 0]}
         />
