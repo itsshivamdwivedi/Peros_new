@@ -8,7 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import BackUpJar from "../BackUpJar"
 import { useGSAP } from "@gsap/react";
-import {Model} from "../PeanutButterjar2"
+import {Model} from "../PeanutButterjar2";
+import { useStore } from "@/app/hooks/useStore";
 
 gsap.registerPlugin(useGSAP,ScrollTrigger);
 
@@ -19,19 +20,23 @@ type Props = {};
 
 
 export default function Scene({}: Props){
+  const isReady = useStore((state)=> state.isReady)
+  
+  
+
   const jar1Ref = useRef<Group>(null);
   const jar2Ref = useRef<Group>(null);
   const groupRef = useRef<Group>(null);
   
   useGSAP(() => {
     if (!jar1Ref.current || !jar2Ref.current || !groupRef.current) return;
-  
-    // Initial positions and rotations
+    isReady();
+   
     gsap.set(jar1Ref.current.position,  { x: -5.5 ,y:-0.2 }); 
-    gsap.set(jar1Ref.current.rotation, { z: 0 });
+    gsap.set(jar1Ref.current.rotation, { y: Math.PI*1.5 });
   
-    gsap.set(jar2Ref.current.position, { x: 5, y: -0.2}); // Right jar position updated
-    gsap.set(jar2Ref.current.rotation, { z: 0 });
+    gsap.set(jar2Ref.current.position, { x: 5, y: -0.2});
+    gsap.set(jar2Ref.current.rotation, { y: Math.PI*1.9  });
 
     const introTl = gsap.timeline({
       defaults: {
@@ -54,7 +59,7 @@ export default function Scene({}: Props){
         start: "top top",
           end: "bottom bottom",
         scrub: 1.5,
-        markers:true,
+        // markers:true,
         // pin: true, 
         // anticipatePin: 1, 
       },
@@ -62,11 +67,11 @@ export default function Scene({}: Props){
    
   
     scrollTl
-      .to(groupRef.current.rotation, { y: Math.PI * 3.1 },2) // Rotate the group
-      // Jar 1 animations
+      .to(groupRef.current.rotation, { y: Math.PI * 3.1 },2) 
+      // Jar 1 animation
       .to(jar1Ref.current.position, { x: -0.1, y: -1.7, z: -1.5 }, 0)
       .to(jar1Ref.current.rotation, { z: 0 }, 0)
-      // Jar 2 animations
+      // Jar 2 animation
       .to(jar2Ref.current.position, { x: 1.6, y: -1.3, z: -0.9 }, 0)
       .to(jar2Ref.current.rotation, { z: 0.1 }, 0)
     .to(

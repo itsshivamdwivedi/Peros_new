@@ -7,12 +7,15 @@ import { Bounded } from "./Bounded";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextSplitter } from "../TextSplitter";
 import Button from "../Button";
+import { View } from "@react-three/drei";
 import { useGSAP } from "@gsap/react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { View } from "@react-three/drei";
+import { useStore } from "@/app/hooks/useStore";
 
 import Scene from "./Scene";
+import { read } from "fs";
+import { useMediaQuery } from "@/app/hooks/useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,8 +27,13 @@ const Hero: React.FC = () => {
       once: false, 
     });
   }, []);
+
+
+  const ready =useStore((state)=>state.ready);
+  const isDesktop = useMediaQuery("(min-width:768px)",true)
+
   useGSAP(() => {
- 
+    if(!ready) return ;
 
     const introTl = gsap.timeline();
     introTl
@@ -89,15 +97,19 @@ const Hero: React.FC = () => {
     //   duration: 0.1,
 
     // });
-  }, []);
+  }, {dependencies:[ready,isDesktop]});
 
   return (
     <Bounded>
+      {isDesktop && (
+
      <View className="hero-scene sticky top-0 z-50 -mt-[100vh] hidden h-screen
       w-screen md:block"
       >
       <Scene />
      </View>
+
+      )}
 
 
       <section className="grid  w-88 place-items-center overflow-hidden">

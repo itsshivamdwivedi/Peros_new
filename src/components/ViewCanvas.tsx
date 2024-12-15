@@ -5,6 +5,7 @@ import { View } from "@react-three/drei";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Scene from "./Hero/Scene";
+import {Perf} from "r3f-perf"
 
 const Loader = dynamic(
   () => import("@react-three/drei").then((mod) => mod.Loader),
@@ -38,6 +39,7 @@ export default function ViewCanvas({}: Props) {
       >
         <Suspense fallback={null}>
          <View.Port />
+         <Perf />
         </Suspense>
       </Canvas>
       <Loader />
