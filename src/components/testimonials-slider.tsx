@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { imageLoader } from "@/app/lib/imageLoader";
+import { imageLoader } from "@/app/libs/imageLoader";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
