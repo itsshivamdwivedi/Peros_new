@@ -83,8 +83,8 @@ export default function AddToCartButton({ productId, type }) {
       isIconOnly
       size="sm"
     >
-      {!isAdded && <AddShoppingCartIcon className="text-xs" />}
-      {isAdded && <ShoppingCartIcon className="text-xs" />}
+      {!isAdded && <AddShoppingCartIcon className="text-xl" />}
+      {isAdded && <ShoppingCartIcon className="text-xl" />}
     </Button>
   );
 }

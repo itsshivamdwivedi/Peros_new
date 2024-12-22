@@ -1,7 +1,7 @@
 "use client";
 
 import AuthContextProvider, { useAuth } from "@/contexts/AuthContext";
-
+import CartContext, { CartProvider } from "@/contexts/CartContext"
 import { CircularProgress, Navbar } from "@nextui-org/react";
 import Link from "next/link";
 
@@ -10,9 +10,12 @@ export default function Layout({ children }) {
     <main>
      <Navbar/>
       <AuthContextProvider>
+        <CartProvider>
+
         <UserChecking>
           <section className="min-h-screen">{children}</section>
         </UserChecking>
+        </CartProvider>
       </AuthContextProvider>
     
     </main>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton"
 import AuthContextProvider from "@/contexts/AuthContext";
+import HeaderClientButtons from "@/components/HeaderClientButtons"
 const Navbar = () => {
   const menuList = [
     {
@@ -53,11 +54,14 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center space-x-4">
-        <Link href="/login">
+        {/* <Link href="/login">
        <button className="bg-green-600 px-4 py-1 rounded-full text-white hover:bg-green-300 font-bold">
         Login
        </button>
-        </Link>
+        </Link> */}
+        <AuthContextProvider>
+          <HeaderClientButtons />
+        </AuthContextProvider>
         <Link href={`/account`}>
           <button
             title="My Account"
