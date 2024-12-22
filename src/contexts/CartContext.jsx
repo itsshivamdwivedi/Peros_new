@@ -50,12 +50,12 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (item) => {
     const updatedCart = [...cart, item];
-    updateCart(updatedCart); // Sync with Firestore
+    updateCart(updatedCart);
   };
 
   const removeFromCart = (itemId) => {
     const updatedCart = cart.filter((item) => item.id !== itemId);
-    updateCart(updatedCart); // Sync with Firestore
+    updateCart(updatedCart); 
   };
 
   return (

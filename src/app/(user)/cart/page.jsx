@@ -39,7 +39,7 @@ export default function CartPage() {
                       <p className="text-sm text-gray-600">
                         Quantity: {item.quantity}
                       </p>
-                      <p className="text-sm text-gray-600">Price: ${item.price}</p>
+                      <p className="text-sm text-gray-600">Price: ₹{item.price}</p>
                     </div>
                   </div>
                   <button
@@ -52,9 +52,9 @@ export default function CartPage() {
               ))}
             </ul>
             <div className="mt-6 flex justify-between items-center">
-              <span className="text-2xl font-semibold">Total: ${calculateTotal().toFixed(2)}</span>
+              <span className="text-2xl font-semibold">Total: ₹{calculateTotal().toFixed(2)}</span>
               <button
-                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+                className="px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition"
               >
                 Checkout
               </button>

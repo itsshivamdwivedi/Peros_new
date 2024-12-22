@@ -8,6 +8,9 @@ const nextConfig = {
   //   });
   //   return config;
   // },
+  images: {
+    domains: ['pintola.in'], // Add the domain here
+  },
 };
 
 export default nextConfig;
