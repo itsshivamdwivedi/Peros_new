@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles/globals.css */
+@media (max-width: 768px) {
+  .canvas-container {
+    height: 60vh;
+    width: 80vw;
+  }
+}
+@media (max-width: 480px) {
+  .canvas-container {
+    height: 50vh;
+    width: 90vw;
+  }
+}

@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs", "src/app/(auth)/login/page.jsx", "src/app/admin/components/Sidebar.jsx", "src/app/admin/components/Header.jsx", "src/app/admin/layout.jsx", "src/components/Navbar.tsx", "src/contexts/AuthContext.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs", "src/app/(auth)/login/page.jsx", "src/app/admin/components/Sidebar.jsx", "src/app/admin/components/Header.jsx", "src/app/admin/layout.jsx", "src/components/Navbar.tsx", "src/contexts/AuthContext.jsx", "src/app/(pages)/products/page.jsx", "src/app/(pages)/products/page.jsx", "src/app/(pages)/products/page.jsx", "src/app/(pages)/products/page.jsx", "src/app/(pages)/products/page.jsx", "src/app/(user)/cart/page.jsx", "src/app/(user)/cart/page.jsx", "src/app/(pages)/products/page.jsx", "src/app/(pages)/products/page.jsx", "src/app/(user)/checkout/page.jsx", "src/app/api/create-order/verify-payment/verify-payment.js", "src/app/api/create-order/verify-payment/verify-payment.js"],
   "exclude": ["node_modules"]
 }

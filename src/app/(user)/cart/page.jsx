@@ -1,45 +1,116 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext"; // Import CartContext
-import { Trash } from "lucide-react"; // Trash icon to remove items
+import {  Trash } from "lucide-react"; // Trash icon to remove items
+import Link from "next/link";
+import gsap from "gsap";
+import Navbar from "@/components/Navbar";
+import Router from "next/router";
 
 export default function CartPage() {
   const { user } = useAuth();
   const { cart, removeFromCart, loading } = useCart(); // Get cart items and functions from CartContext
+  const textRef = useRef(null);
+  const [loadingx, setLoadingx] = useState(true);
+  const router =Router
+
+  // Simulate a loading screen
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoadingx(false);
+    }, 20); // Loading screen duration: 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login"); // Redirect to login page if user is not logged in
+    }
+  }, [user, router]);
+
+  useEffect(() => {
+    if (!loading && textRef.current) {
+      // GSAP animation: move upward and fade in
+      gsap.fromTo(
+        textRef.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'ease out' }
+      );
+    }
+  }, [loadingx]);
+
+
+  
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0); // Calculate total price
   };
+  const calculatemrpTotal = () => {
+    return cart.reduce((total, item) => total + item.pricel * item.quantity, 0); // Calculate total price
+  };
+
 
   if (loading) {
     return <div>Loading...</div>; // Show loading while cart data is fetched
   }
 
   return (
-    <main className="p-5 md:p-10 bg-gray-50">
-      <section className="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h1 className="text-4xl font-bold text-gray-800 mb-6">Your Cart</h1>
-        {cart.length === 0 ? (
-          <p className="text-lg text-gray-600">Your cart is empty.</p>
+    <div className="">  <Navbar/>
+    
+    <div className=" px-[10vw] h-full mt-10 ">
+     
+     
+        <h1 className="text-3xl font-serif font-bold hover:text-green-400   "   >Shopping Cart   </h1>
+      <h1 className="border-b-4 w-28 border-green-500 mb-4 mt-1 " ></h1>
+      {cart.length === 0 ? (
+        <div className="grid w-full mt-[60vw] lg:mt-[25vw] justify-center content-center items-center font-semibold font-serif" ref={textRef} > There are no items in your cart.
+       <Link href="/products"><button className="content-center bg-green-500 ml-8 mr-8 py-2 mt-2 px-[1vw] hover:bg-amber-400 text-white rounded-md">Continue Shopping</button> </Link>
+           </div>
         ) : (
           <div>
-            <ul className="space-y-6">
+            <div className=" ">
+         
+         <ul className="hidden xl:flex xl:">
+           <li className="text-2xl font-serif font-semibold">PRODUCT</li>
+           <ul  className=" flex mx-[12vw] justify-between font-semibold font-serif"><li>  PRODUCT VARIANT</li>
+      
+          </ul>
+           <ul  className=" flex justify-between font-serif font-semibold "><li>   QUANTITY</li>
+      
+          </ul>
+         </ul>
+      
+      </div>
+          
+          
+
+
+      <div
+              
+              className="flex-col justify-between items-center border-t border-b py-4 sm:flex-row sm:justify-between "
+            >
+
               {cart.map((item) => (
-                <li key={item.id} className="flex items-center justify-between">
+                <li key={item.id} className="flex items-center justify-between mt-5">
                   <div className="flex items-center space-x-4">
                     <img
                       src={item.image || "/assets/placeholder.png"} // Default image
                       alt={item.title}
-                      className="w-20 h-20 object-cover rounded-lg"
+                      className="w-20 h-20 object-cover rounded-lg xl:object-cover xl:w-[50wh] xl:h-[20vh]"
                     />
                     <div>
-                      <h2 className="text-lg font-semibold">{item.title}</h2>
+                      <h2 className="text-lg font-semibold font-serif">{item.title}</h2>
                       <p className="text-sm text-gray-600">
                         Quantity: {item.quantity}
                       </p>
-                      <p className="text-sm text-gray-600">Price: ${item.price}</p>
+                      <p className="text-sm text-gray-600">
+                        Size: {item.size}
+                      </p>
+                      <p className="text-sm text-gray-600">Price: ₹{item.price}</p>
+                      <p className="text-sm text-gray-600">Mrp:{item.pricel}</p>
                     </div>
                   </div>
                   <button
@@ -50,18 +121,58 @@ export default function CartPage() {
                   </button>
                 </li>
               ))}
-            </ul>
-            <div className="mt-6 flex justify-between items-center">
-              <span className="text-2xl font-semibold">Total: ${calculateTotal().toFixed(2)}</span>
-              <button
-                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
-              >
-                Checkout
-              </button>
-            </div>
+         
+            
           </div>
-        )}
-      </section>
-    </main>
+          <div className="mt-8 ">
+            <div className="text-xl font-bold f bg-gray-200  flex justify-between sm:justify-end sm:gap-[4vw] h-[10vh] content-center items-center self-center px-[2vw]  "> 
+              <div> Total:
+                <p className="text-green-500 text-medium">Savings:</p> </div>
+              <div>₹{calculateTotal().toFixed(2)}
+                
+                <p className="text-green-500 text-medium">{calculatemrpTotal()-calculateTotal()}.00</p>
+              </div>
+            </div>
+            
+          
+           
+           
+          </div>
+         <div className=" flex-col content-center items-center self-center justify-center   xl:pl-[60vw]  md:pl-[30vw]">
+        <Link href="/checkout"> <button className="bg-green-500 text-white px-4 hover:bg-amber-400  py-2 rounded-md mt-4 w-full">
+              Checkout
+            </button></Link>
+        
+        <Link href ="/products"><button className="bg-green-500 text-white px-4 py-2   hover:bg-amber-400 rounded-md mt-4 w-full">
+              Continue Shopping
+            </button></Link>
+         
+         </div>
+          </div>
+             )}
+     
+
+
+
+            
+   
+      </div>
+  
+
+
+
+      
+  
+     
+      
+    </div>
+    
+
+      
+    
+     
+      
+      
+ 
   );
 }

@@ -1,0 +1,9 @@
+{
+    "builds": [
+      {
+        "src": "src/page.tsx",
+        "use": "@vercel/node"
+      }
+    ]
+  }
+  

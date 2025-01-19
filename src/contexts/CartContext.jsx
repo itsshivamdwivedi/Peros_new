@@ -49,8 +49,23 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = (item) => {
-    const updatedCart = [...cart, item];
-    updateCart(updatedCart); // Sync with Firestore
+    const existingItemIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
+
+    let updatedCart;
+
+    if (existingItemIndex !== -1) {
+      // Item exists in cart, update its quantity
+      updatedCart = cart.map((cartItem, index) => 
+        index === existingItemIndex
+          ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+          : cartItem
+      );
+    } else {
+      // Item does not exist in cart, add it
+      updatedCart = [...cart, item];
+    }
+
+    updateCart(updatedCart); // Sync with Firestore and update local state
   };
 
   const removeFromCart = (itemId) => {

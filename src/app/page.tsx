@@ -1,7 +1,12 @@
+"use client"
+
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import ViewCanvas from "@/components/ViewCanvas";
 import TestimonialSlider from "@/components/testimonials-slider"
+import Hom from "@/components/Hom"
+import { Canvas } from '@react-three/fiber';
+
 
 const testimonials = [
     {
@@ -57,15 +62,29 @@ const testimonials = [
 export default function Home(){
     return (
        
-    <main>
+    <main  className="">
         <Navbar/>
-        <ViewCanvas />
+        {/* <ViewCanvas />
       <Hero />
        <TestimonialSlider testimonials={testimonials} />
         <h1 className="text-center text-4xl text-semibold
         ">
             THis is my home page 
-        </h1>
+        </h1> */}
+        
+      {/* Lighting */}
+      
+      
+      {/* Model Component */}
+      {/* <Hom/> */}
+    
+    
+      npm install -g vercel
+
+
+
+        
+      
     </main>
 
     );

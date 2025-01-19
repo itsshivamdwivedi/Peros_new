@@ -42,13 +42,13 @@ const Navbar = () => {
         <Link href="/about" className="text-black hover:bg-green-30 transition">
           About Us
         </Link>
-        <Link href="/Home" className="text-black hover:text-[#D9F99D] transition">
+        <Link href="/products" className="text-black hover:text-[#D9F99D] transition">
           Products
         </Link>
         <Link href="/contact-us" className="text-black hover:text-[#D9F99D] transition">
           Contact Us
         </Link>
-        <Link href="/buy" className="bg-[#D9F99D] text-black px-4 py-2 rounded-md hover:bg-green-300 transition">
+        <Link href="/" className="bg-[#D9F99D] text-black px-4 py-2 rounded-md hover:bg-green-300 transition">
           Buy
         </Link>
       </div>
