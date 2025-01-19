@@ -494,28 +494,7 @@ const Products: React.FC = () => {
   
 
 
-  useEffect(() => {
-    // Select all images and ensure they are of type HTMLElement
-    gsap.utils.toArray(".image").forEach((image) => {
-      if (image instanceof HTMLElement) { // Ensure it's an HTMLElement
-        gsap.fromTo(
-          image,
-          { scale: 0, y: 100 }, // Start scaled down and moved downwards
-          {
-            scale: 1,
-            y: 0, // End at normal size and position
-            duration: 1,
-            scrollTrigger: {
-              trigger: image,
-              start: "top 80%", // When the image enters the viewport
-              end: "top 30%", // When it reaches a certain scroll point
-              scrub: true,
-            },
-          }
-        );
-      }
-    });
-  }, []);
+  
   
   
   useEffect(() => {
@@ -781,30 +760,10 @@ const Products: React.FC = () => {
 
 
 
-    <div className="relative w-full h-screen flex justify-center items-center ">
-      <div className="watch-container w-full h-full relative ">
-        
-        
-        <img
-          src="https://pintola.in/cdn/shop/files/All_Natural_Creamy_350gm_600x600_9d3cc337-ace9-4fed-bc7f-1cbfd070ecfe_800x.jpg?v=1732017216"
-          className="watch-image object-cover w-96 h-96 md:hidden sm:hidden"
-          alt="Pintola Natural Creamy"
-        />
-
-<div className="relative hidden xl:inline">
-        <img
-          src="https://pintola.in/cdn/shop/files/1_720a96fd-0b37-4c89-9aab-b9bb879212d8_1800x.jpg?v=1691842841"
-          className="image object-cover w-full"
-          alt="Image 1"
-        />
-        
-      </div>
-      </div>
-    </div>
 
 
     
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col ">
      
       {/* Image and Text Containers */}
       <div className="relative overflow-hidden">
@@ -813,72 +772,49 @@ const Products: React.FC = () => {
           className="image object-cover w-full"
           alt="Image 1"
         />
-         <h1 className="text-4xl font-bold text-center mb-8">
-        Seamless Sliding Images
-      </h1>
+        
       </div>
       <div className="relative overflow-hidden">
         <img
           src="https://pintola.in/cdn/shop/files/2_7964a787-3593-4dcb-8e4a-f9b2cca2c1ad_1800x.jpg?v=1691842840"
           className="image object-cover w-full"
           alt="Image 2"
-        />  <h1 className="text-4xl font-bold text-center mb-8">
-        Seamless Sliding Images
-      </h1>
+        />  
       </div>
       <div className="relative overflow-hidden">
         <img
           src="https://pintola.in/cdn/shop/files/4_cd065e62-cce8-41dd-a2d4-7bbb474b2050_1800x.jpg?v=1691842841"
           className="image object-cover w-full"
           alt="Image 3"
-        />  <h1 className="text-4xl font-bold text-center mb-8">
-        Seamless Sliding Images
-      </h1>
+        />  
       </div>
       <div className="relative overflow-hidden">
         <img
           src="https://pintola.in/cdn/shop/files/4_cd065e62-cce8-41dd-a2d4-7bbb474b2050_1800x.jpg?v=1691842841"
           className="image object-cover w-full"
           alt="Image 4"
-        />  <h1 className="text-4xl font-bold text-center mb-8">
-        Seamless Sliding Images
-      </h1>
+        />  
       </div>
       <div className="relative overflow-hidden">
         <img
-          src="https://pintola.in/cdn/shop/files/6_1d7254c5-1104-4f44-aef6-5ad9f009fa1b_2000x.jpg?v=1691842840"
+          src="https://pintola.in/cdn/shop/files/4_cd065e62-cce8-41dd-a2d4-7bbb474b2050_1800x.jpg?v=1691842841"
           className="image object-cover w-full"
-          alt="Image 5"
-        /> 
+          alt="Image 4"
+        />  
       </div>
+      <div className="relative overflow-hidden">
+        <img
+          src="https://pintola.in/cdn/shop/files/4_cd065e62-cce8-41dd-a2d4-7bbb474b2050_1800x.jpg?v=1691842841"
+          className="image object-cover w-full"
+          alt="Image 4"
+        />  
+      </div>
+     
     </div>
     
-    <footer className="footer relative h-[400px] bg-gray-900 text-white overflow-hidden">
-
-      {/* Background Layers */}
-      <div className="absolute top-0 left-0 w-full h-full layer-3 bg-cover bg-center bg-[url('https://pintola.in/cdn/shop/files/5_5889f889-bf4e-4a24-b174-4021b6876569_800x.jpg?v=1717500086')]"></div>
-      <div className="absolute top-0 left-0 w-full h-full layer-2 bg-cover bg-center bg-[url('https://pintola.in/cdn/shop/files/4_eb5c4e78-2ace-40d7-9733-b429a05385fb_800x.jpg?v=1717500086')]"></div>
-      <div className="absolute top-0 left-0 w-full h-full layer-1 bg-cover bg-center bg-[url('https://pintola.in/cdn/shop/files/3_608fdb9f-4645-4a9f-a845-8231908e313a_800x.jpg?v=1717500086')]"></div>
-
-      {/* Footer Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-        <h2 className="text-3xl font-bold">Stay Connected</h2>
-        <p className="mt-4 text-lg">Follow us on our social channels for the latest updates!</p>
-        <div className="mt-6 flex gap-4">
-          <a href="#" className="p-3 bg-gray-800 rounded-full hover:bg-gray-700">
-            Facebook
-          </a>
-          <a href="#" className="p-3 bg-gray-800 rounded-full hover:bg-gray-700">
-            Twitter
-          </a>
-          <a href="#" className="p-3 bg-gray-800 rounded-full hover:bg-gray-700">
-            Instagram
-          </a>
-        </div>
-      </div>
-    </footer>
+   
     
-    <div>     <img src="https://pintola.in/cdn/shop/files/6_1d7254c5-1104-4f44-aef6-5ad9f009fa1b_2000x.jpg?v=1691842840" alt=" " className=" object-cover w-[100%]" /></div>
+
 
    </div>
 
