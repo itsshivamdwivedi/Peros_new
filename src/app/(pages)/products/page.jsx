@@ -26,7 +26,7 @@
 =======
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus } from "lucide-react"; 
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 
@@ -192,6 +192,7 @@ function App() {
     <CartProvider>
      
       <Products />
+      <div></div>
       
     </CartProvider>
  </div>
