@@ -2,8 +2,9 @@
 
 import AuthContextProvider, { useAuth } from "@/contexts/AuthContext";
 import CartContext, { CartProvider } from "@/contexts/CartContext"
-import { CircularProgress, Navbar } from "@nextui-org/react";
+import { CircularProgress} from "@nextui-org/react";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 export default function Layout({ children }) {
   return (

@@ -1,6 +1,6 @@
 import AuthContextProvider from "@/contexts/AuthContext";
 import { CartProvider } from "@/contexts/CartContext";
-import { Navbar } from "@nextui-org/react";
+import { Navbar } from "@/components/Navbar";
 
 
 export default function Layout ({children}){
@@ -8,11 +8,11 @@ export default function Layout ({children}){
         <main>
             <AuthContextProvider>
                 <CartProvider>
+                    
+          
 
             {children}
                 </CartProvider>
-        
-
             </AuthContextProvider>
         </main>
     )

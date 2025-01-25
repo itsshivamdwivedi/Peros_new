@@ -101,11 +101,15 @@ export default function CartPage() {
                       <p className="text-sm text-gray-600">
                         Quantity: {item.quantity}
                       </p>
+<<<<<<< HEAD
                       <p className="text-sm text-gray-600">
                         Size: {item.size}
                       </p>
                       <p className="text-sm text-gray-600">Price: ₹{item.price}</p>
                       <p className="text-sm text-gray-600">Mrp:{item.pricel}</p>
+=======
+                      <p className="text-sm text-gray-600">Price: ₹{item.price}</p>
+>>>>>>> f478c95bf734807d14dacbfa6b94968d65d5a27c
                     </div>
                   </div>
                   <button
@@ -116,8 +120,20 @@ export default function CartPage() {
                   </button>
                 </li>
               ))}
+<<<<<<< HEAD
          
             
+=======
+            </ul>
+            <div className="mt-6 flex justify-between items-center">
+              <span className="text-2xl font-semibold">Total: ₹{calculateTotal().toFixed(2)}</span>
+              <button
+                className="px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition"
+              >
+                Checkout
+              </button>
+            </div>
+>>>>>>> f478c95bf734807d14dacbfa6b94968d65d5a27c
           </div>
           <div className="mt-8 ">
             <div className="text-xl font-bold f bg-gray-200  flex justify-between sm:justify-end sm:gap-[4vw] h-[10vh] content-center items-center self-center px-[2vw]  "> 

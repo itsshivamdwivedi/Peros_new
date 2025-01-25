@@ -49,6 +49,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = (item) => {
+<<<<<<< HEAD
     const existingItemIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
 
     let updatedCart;
@@ -66,11 +67,15 @@ export const CartProvider = ({ children }) => {
     }
 
     updateCart(updatedCart); // Sync with Firestore and update local state
+=======
+    const updatedCart = [...cart, item];
+    updateCart(updatedCart);
+>>>>>>> f478c95bf734807d14dacbfa6b94968d65d5a27c
   };
 
   const removeFromCart = (itemId) => {
     const updatedCart = cart.filter((item) => item.id !== itemId);
-    updateCart(updatedCart); // Sync with Firestore
+    updateCart(updatedCart); 
   };
 
   return (

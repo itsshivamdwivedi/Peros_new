@@ -17,6 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <html lang="en">
             <body>
                 <Toaster />
+                
                 <NextUIProvider>
                     {/* <AuthContextProvider> */}
                         {children}
