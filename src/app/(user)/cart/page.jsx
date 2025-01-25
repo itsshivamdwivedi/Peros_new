@@ -73,14 +73,9 @@ export default function CartPage() {
           <div>
             <div className=" ">
          
-         <ul className="hidden xl:flex xl:">
+         <ul className="hidden xl:flex xl:mt-10">
            <li className="text-2xl font-serif font-semibold">PRODUCT</li>
-           <ul  className=" flex mx-[12vw] justify-between font-semibold font-serif"><li>  PRODUCT VARIANT</li>
-      
-          </ul>
-           <ul  className=" flex justify-between font-serif font-semibold "><li>   QUANTITY</li>
-      
-          </ul>
+          
          </ul>
       
       </div>
@@ -102,7 +97,7 @@ export default function CartPage() {
                       className="w-20 h-20 object-cover rounded-lg xl:object-cover xl:w-[50wh] xl:h-[20vh]"
                     />
                     <div>
-                      <h2 className="text-lg font-semibold font-serif">{item.title}</h2>
+                      <h2 className="text-lg font-semibold font-serif xl:px">{item.title}</h2>
                       <p className="text-sm text-gray-600">
                         Quantity: {item.quantity}
                       </p>
@@ -115,7 +110,7 @@ export default function CartPage() {
                   </div>
                   <button
                     onClick={() => removeFromCart(item.id)}
-                    className="text-red-600 hover:text-red-800 transition"
+                    className="text-red-600 hover:text-red-800 transition xl:mr-10"
                   >
                     <Trash size={20} />
                   </button>

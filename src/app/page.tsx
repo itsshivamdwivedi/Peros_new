@@ -6,7 +6,7 @@ import ViewCanvas from "@/components/ViewCanvas";
 import TestimonialSlider from "@/components/testimonials-slider"
 import Hom from "@/components/Hom"
 import { Canvas } from '@react-three/fiber';
-
+import Herojj from "@/components/Herojj"
 
 const testimonials = [
     {
@@ -63,7 +63,7 @@ export default function Home(){
     return (
        
     <main  className="">
-        <Navbar/>
+    
         {/* <ViewCanvas />
       <Hero />
        <TestimonialSlider testimonials={testimonials} />
@@ -76,11 +76,19 @@ export default function Home(){
       
       
       {/* Model Component */}
-      {/* <Hom/> */}
+      <div>
+      <Navbar/>
+     
+      <Hom/>
+     
+      </div>
     
-    
-      npm install -g vercel
 
+
+
+    
+    
+     
 
 
         

@@ -339,7 +339,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { useCart } from "@/contexts/CartContext"; // Ensure your CartContext is correctly imported
+import { useCart } from "@/contexts/CartContext"; 
 import gsap from "gsap";
 import Link from "next/link";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -433,23 +433,23 @@ const Products: React.FC = () => {
   useEffect(() => {
     const watchImage = document.querySelector(".watch-image");
 
-    // Animation for rotation and zoom with multiple scroll triggers
+   
     gsap.fromTo(
       watchImage,
       {
         rotation: 0,
-        scale: 1,  // Start with no zoom
+        scale: 1,  
       },
       {
-        rotation: 360,  // Rotate the image 360 degrees
-        scale: 1.5,     // Zoom in to 1.5 times its size
+        rotation: 360, 
+        scale: 1.5,    
         scrollTrigger: {
           trigger: watchImage,
-          start: "top top",    // Start the animation when the image is at the top of the viewport
-          end: "+=200%",       // Make the scroll effect last longer (200% of the viewport height)
-          scrub: 1,            // Synchronize animation with the scroll
-          pin: true,           // Pin the image in place during the scroll animation
-          anticipatePin: 1,    // Prevent the page from jumping around too much
+          start: "top top",    
+          end: "+=200%",      
+          scrub: 1,          
+          pin: true,          
+          anticipatePin: 1,   
         },
         duration: 3,
       }
@@ -458,19 +458,19 @@ const Products: React.FC = () => {
 
 
   useEffect(() => {
-    // Parallax effect for the footer layers
+   
     gsap.to(".layer-1", {
-      yPercent: -20, // Moves slower than the scroll
+      yPercent: -20, 
       scrollTrigger: {
         trigger: ".footer",
-        start: "top bottom", // When the footer enters the viewport
-        end: "bottom bottom", // Until the footer reaches the bottom
+        start: "top bottom", 
+        end: "bottom bottom", 
         scrub: true,
       },
     });
 
     gsap.to(".layer-2", {
-      yPercent: -40, // Moves slower than layer-1
+      yPercent: -40, 
       scrollTrigger: {
         trigger: ".footer",
         start: "top bottom",
@@ -480,7 +480,7 @@ const Products: React.FC = () => {
     });
 
     gsap.to(".layer-3", {
-      yPercent: -60, // Moves the slowest for a deeper parallax effect
+      yPercent: -60, 
       scrollTrigger: {
         trigger: ".footer",
         start: "top bottom",
@@ -524,11 +524,11 @@ const Products: React.FC = () => {
 
   useEffect(() => {
     if (boxRef.current) {
-      // GSAP animation: right to left
+    
       gsap.fromTo(
         boxRef.current,
-        { x: '100%', opacity: 0 }, // Start offscreen to the right
-        { x: '0%', opacity: 1, duration: 1.5, ease: 'power2.out' } // Slide to center
+        { x: '100%', opacity: 0 }, 
+        { x: '0%', opacity: 1, duration: 1.5, ease: 'power2.out' } 
       );
     }
   }, []);
@@ -540,14 +540,14 @@ const Products: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // Loading screen duration: 3 seconds
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     if (loading) {
-      // GSAP animation: left and right boxes
+     
       gsap.fromTo(
         leftBoxRef.current,
         { x: '-100%', opacity: 0 },
@@ -564,7 +564,7 @@ const Products: React.FC = () => {
 
 
 
-  const { addToCart } = useCart(); // Access the `addToCart` function from the context
+  const { addToCart } = useCart(); 
 
   const handleVariantClick = (variantId: string) => {
     const variant = peanutButterVariants.find((v) => v.id === variantId);
@@ -592,7 +592,7 @@ const Products: React.FC = () => {
       size:selectedSize.label,
       pricel:selectedSize.pricel,
     };
-    addToCart(cartItem); // Add item to the cart
+    addToCart(cartItem); 
 
   };
 
@@ -601,7 +601,7 @@ const Products: React.FC = () => {
     <div className="w-full ">
       
       <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col lg:flex-row gap-16 mt-4 ">
-        {/* Left Section */}
+      
         <div className="w-full lg:w-1/2  lg:sticky top-20 h-max" ref={leftBoxRef}>
           <div className="h-[500px] relative">
             <Image
@@ -626,7 +626,6 @@ const Products: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Section */}
         <div className="w-full lg:w-1/2" ref={boxRef}>
           <h1 className="text-3xl font-bold mb-4 font-serif">{selectedVariant.name}</h1>
           <p className="text-lg text-gray-500 mb-4 ">{selectedVariant.description}</p>
@@ -643,7 +642,7 @@ const Products: React.FC = () => {
             <div className="flex items-center justify-between w-full gap-3">
               {peanutButterVariants.map((variant) => (
                 <button
-                              key={`variant-${variant.id}`} // Unique key for variants
+                              key={`variant-${variant.id}`}
                               onClick={() => handleVariantClick(variant.id)}
                               className={` font-bold text-sm rounded-md h-[8vh] py-1 px-4 hover:bg-amber-400 cursor-pointer font-serif  ${
                                 variant.id === selectedVariant.id
@@ -676,11 +675,7 @@ const Products: React.FC = () => {
             </div>
          
 
-          {/* <div className="flex items-center gap-4 mt-6">
-            <button onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}>-</button>
-            <span>{quantity}</span>
-            <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
-          </div> */}
+         
           <div>
           <div className='flex flex-col gap-4'>
           <div className='flex items-center  justify-between mt-4 overflow-hidden rounded-md ring-1 ring-black md:w-[18vw] '>
@@ -765,7 +760,7 @@ const Products: React.FC = () => {
     
       <div className="flex flex-col ">
      
-      {/* Image and Text Containers */}
+    
       <div className="relative overflow-hidden">
         <img
           src="https://pintola.in/cdn/shop/files/1_720a96fd-0b37-4c89-9aab-b9bb879212d8_1800x.jpg?v=1691842841"
