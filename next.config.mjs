@@ -9,7 +9,8 @@ const nextConfig = {
   //   return config;
   // },
   images: {
-    domains: ['pintola.in'], // Add the domain here
+    domains: ['pintola.in','i.ibb.co'], 
+   
   },
 };
 

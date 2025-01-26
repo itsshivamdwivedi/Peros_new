@@ -117,7 +117,7 @@ export const Model = forwardRef((props, ref) => {
     <group {...props} dispose={null} ref={ref}>
     <group
   position={[0, 0, 0]}
-        rotation={[Math.PI / 1.3, 0.2, 0]}
+        rotation={[Math.PI / 2, 0.2, 0]}
         scale={[0.020, 0.020, 0.020]}
       >
         <mesh

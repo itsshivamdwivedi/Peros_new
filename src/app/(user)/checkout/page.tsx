@@ -172,7 +172,7 @@ const Checkout = () => {
     }
   
     try {
-      // Get a reference to the user's document
+      
       const userRef = doc(db, `users/${user.uid}`);
   
       // Log the data you're going to save for debugging purposes
@@ -412,7 +412,7 @@ const Checkout = () => {
                       {cart.map((item:any)  => (
                     <div key={item.id} className="flex justify-evenly content-center ">
                       <div><span><img src={item.image} className="w-20 h-20 object-cover mr-4 xl:object-center xl:w-[50wh] xl:h-[20vh]   "  alt="" /> </span></div>
-                      <div className="flex justify-center content-center self-center">{item.name} x {item.quantity}</div>
+                      <div className="flex justify-center content-center self-center">{item.name} x {item.quantity} </div>
                       <div className="flex justify-center content-center self-center">  ₹{item.price * item.quantity}</div>
                       
                       

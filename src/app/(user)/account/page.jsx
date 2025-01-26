@@ -5,7 +5,7 @@ import Orders from "../checkout/order";
 export default function Page(){
     return(
         <main>
-            <Navbar/>
+           
             
             <Orders/>
         </main>

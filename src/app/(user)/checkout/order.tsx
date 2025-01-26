@@ -5,7 +5,7 @@ import { db } from "@/lib/firebase";
 import { doc, getDoc, updateDoc, onSnapshot, Timestamp } from "firebase/firestore";
 import { useAuth } from "@/contexts/AuthContext";
 import { jsPDF } from "jspdf";
-import ChatBot from "@/app/(user)/checkout/chatbot"; 
+
 import LogoutButton from "@/components/LogoutButton";
 
 const Orders = () => {
@@ -65,9 +65,7 @@ const Orders = () => {
  
   
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
+  
 
   // Function to return a class based on the order status
   const getStatusClass = (status: string) => {
@@ -328,18 +326,3 @@ const Orders = () => {
 export default Orders;
 
 
-
-{/* Order Status */}
-                  {/* <p
-                    className={`text-md font-semibold ${getStatusClass(order.status)}`}
-                  >
-                    Status: {order.status || "Pending"}
-                  </p>
-                  {order.status === "Delivered" && (
-                    <button
-                      onClick={() => handleDownloadInvoice(order)}
-                      className="mt-4 px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600"
-                    >
-                      Download Invoice
-                    </button>
-                  )} */}

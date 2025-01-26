@@ -4,6 +4,10 @@ import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { gsap } from "gsap";
+import { db } from "@/lib/firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { useAuth } from "@/contexts/AuthContext";
+
 
 type AddressDetails = {
   firstName: string;
@@ -16,6 +20,16 @@ type AddressDetails = {
   [key: string]: string; 
 };
 
+type PaymentDetails = {
+  orderId: string;
+  paymentMethod: "COD" | "Razorpay"; 
+  razorpayPaymentId?: string; 
+  address: AddressDetails;
+  cart: any[];
+  subtotal: number;
+ userEmail: string;
+};
+
 declare global {
   interface Window {
     Razorpay: any;
@@ -24,10 +38,11 @@ declare global {
 
 const Checkout = () => {
   const { cart } = useCart();
+   const { user } = useAuth();
   const [isProcessing, setIsProcessing] = useState(false);
   const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
-  const [showFormPopup, setShowFormPopup] = useState(false); // Popup for form warning
-  const [showPopup, setShowPopup] = useState(false); // Payment success popup
+  const [showFormPopup, setShowFormPopup] = useState(false); 
+  const [showPopup, setShowPopup] = useState(false); 
   const [paymentDetails, setPaymentDetails] = useState<any>(null);
   const [paymentMethod, setPaymentMethod] = useState<"COD" | "Razorpay">("Razorpay"); // Added payment method
   const [address, setAddress] = useState<AddressDetails>({
@@ -40,16 +55,18 @@ const Checkout = () => {
     pincode: "",
   });
 
-  const [isCartOpen, setIsCartOpen] = useState(false); // For showing/hiding cart details
-
+  const [isCartOpen, setIsCartOpen] = useState(false); 
   const checkoutRef = useRef<HTMLDivElement | null>(null);
-  const formRef = useRef<HTMLDivElement | null>(null); // Reference for form animation
+  const formRef = useRef<HTMLDivElement | null>(null); 
 
-  // Calculate subtotal
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  
+  const subtotal = cart.reduce(
+    (total: number, item: any) => total + item.price * item.quantity,
+    0
+  );
 
   useEffect(() => {
-    // Load Razorpay SDK
+   
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
@@ -57,14 +74,12 @@ const Checkout = () => {
     script.onerror = () => console.error("Failed to load Razorpay SDK");
     document.body.appendChild(script);
 
-    // GSAP animation for checkout section
     gsap.fromTo(
       checkoutRef.current,
       { opacity: 0, y: 50 },
       { opacity: 1, y: 0, duration: 1 }
     );
 
-    // Form animation (fade-in and slide-up)
     gsap.fromTo(
       formRef.current,
       { opacity: 0, y: 30 },
@@ -72,14 +87,36 @@ const Checkout = () => {
     );
   }, []);
 
-  const handlePayment = async () => {
-    if (!isRazorpayLoaded && paymentMethod === "Razorpay") {
-      console.error("Razorpay SDK is not loaded");
-      alert("Razorpay SDK is not loaded. Please try again later.");
+
+
+  const generateOrderId = () => {
+    const timestamp = Date.now();
+    const randomStr = Math.random().toString(36).substring(2, 10);
+    return `ORD-${timestamp}-${randomStr}`;
+  };
+
+  const storePaymentDetails = async (paymentDetails: PaymentDetails) => {
+    if (!paymentDetails.orderId || !paymentDetails.paymentMethod || !paymentDetails.address || !paymentDetails.cart || !paymentDetails.subtotal  || !paymentDetails.userEmail) {
+      console.error("Incomplete payment details:", paymentDetails);
       return;
     }
   
-    // Check if form is filled
+    try {
+    
+      const docRef = await addDoc(collection(db, "orders"), {
+        ...paymentDetails,
+        createdAt: new Date(),
+      });
+  
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+     
+    }
+  };
+  
+
+  const handlePayment = async () => {
     if (
       !address.firstName ||
       !address.lastName ||
@@ -89,59 +126,61 @@ const Checkout = () => {
       !address.state ||
       !address.pincode
     ) {
-      // Show the popup if form is incomplete
-      setShowFormPopup(true);
+      alert("Please fill in all fields");
       return;
     }
-  
+
     setIsProcessing(true);
+
+    if (user) {
+      console.log("User Email:", user.email);
+    } else {
+      console.log("User is not authenticated");
+    }
+
     try {
+      const orderId = generateOrderId();
+
       if (paymentMethod === "Razorpay") {
-        // Create order on the backend for Razorpay
         const response = await fetch("/api/create-order", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ amount: subtotal }), // Send subtotal to backend
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: subtotal, orderId }),
         });
-  
+
         if (!response.ok) {
           throw new Error("Failed to create Razorpay order");
         }
-  
+
         const data = await response.json();
-  
-        // Razorpay options
+
         const options = {
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-          amount: subtotal * 100, // Amount in smallest currency unit
+          amount: subtotal * 100,
           currency: "INR",
-          name: "Your Company Name",
+          name: "Peros",
           description: "Test Transaction",
           order_id: data.orderId,
-          handler: function (response: any) {
-            console.log("Payment Successful:", response);
+          handler: (response: any) => {
             setPaymentDetails({
-              ...response,
+              orderId,
+              paymentMethod: "Razorpay",
+              razorpayPaymentId: response.razorpay_payment_id,
               address,
-              cartItems: cart,
-            }); // Store payment details, address, and cart
-            setPaymentMethod("Razorpay");
-            setShowPopup(true); // Show confirmation popup
-  
-            // Send Email Acknowledgment after successful payment
-            fetch("/api/send-email", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                address,
-                cart,
-                paymentMethod: "Razorpay",
-                orderId: data.orderId,
-              }),
+              cart,
+              subtotal,
+            });
+            setShowPopup(true);
+
+           
+            storePaymentDetails({
+              orderId,
+              paymentMethod: "Razorpay",
+              razorpayPaymentId: response.razorpay_payment_id,
+              address,
+              cart,
+              subtotal,
+              userEmail:user?.email || "unknown",
             });
           },
           prefill: {
@@ -149,35 +188,30 @@ const Checkout = () => {
             email: address.email,
             contact: address.phone,
           },
-          theme: {
-            color: "#3399cc",
-          },
+          theme: { color: "#3399cc" },
         };
-  
+
         const rzp1 = new window.Razorpay(options);
         rzp1.open();
       } else {
-        // Directly show order confirmation if payment method is COD
         setPaymentDetails({
-          orderId: "COD123456", // Dummy order ID for COD
-          paymentMethod: "Cash on Delivery",
+          orderId,
+          paymentMethod: "COD",
+          razorpayPaymentId: orderId,
           address,
-          cartItems: cart,
+          cart,
+          subtotal,
         });
-        setShowPopup(true); // Show confirmation popup
-  
-        // Send Email Acknowledgment for COD
-        fetch("/api/send-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            address,
-            cart,
-            paymentMethod: "Cash on Delivery",
-            orderId: "COD123456", // Example order ID for COD
-          }),
+        setShowPopup(true);
+
+        storePaymentDetails({
+          orderId,
+          paymentMethod: "COD",
+          razorpayPaymentId: orderId,
+          address,
+          cart,
+          subtotal,
+          userEmail:user?.email || "unknown",
         });
       }
     } catch (error) {
@@ -186,18 +220,17 @@ const Checkout = () => {
       setIsProcessing(false);
     }
   };
-
   return (
     <div className="">
      
       <div ref={checkoutRef} className="p-8">
     
 
-        {/* Address Form */}
+     
       <div ref={formRef} className="mb-8">
           <h2 className="text-xl font-semibold font-serif mb-4 hover:text-green-400">Shipping Address</h2>
           <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/** Floating Input Fields */}
+     
             {[
               { name: "firstName", label: "First Name"  },
               { name: "lastName", label: "Last Name" },
@@ -229,7 +262,7 @@ const Checkout = () => {
           </form>
         </div>
 
-        {/* Payment Method Selection */}
+      
         <div className="mb-8 font-serif font-bold mt-[6vh]">
           <h2 className="text-xl font-semibold mb-4 hover:text-green-400">Payment Method</h2>
           <label className="flex items-center">
@@ -256,7 +289,7 @@ const Checkout = () => {
           </label>
         </div>
 
-        {/* Order Summary */}
+        
         <div className="mb-8 mt-[6vh]">
           <h2 className="text-xl font-semibold mb-4 font-serif hover:text-green-400">Order Summary</h2>
           <div className="border rounded-md p-4">
@@ -265,7 +298,7 @@ const Checkout = () => {
               <span>₹{subtotal}</span>
             </div>
 
-            {/* Cart Details Dropdown */}
+           
             <div>
               <button
                 onClick={() => setIsCartOpen(!isCartOpen)}
@@ -276,10 +309,10 @@ const Checkout = () => {
 
               {isCartOpen && (
                 <div className="mt-2">
-                  {cart.map((item, index) => (
-                    <div key={index} className="flex justify-evenly content-center ">
+                      {cart.map((item:any)  => (
+                    <div key={item.id} className="flex justify-evenly content-center ">
                       <div><span><img src={item.image} className="w-20 h-20 object-cover mr-4 xl:object-center xl:w-[50wh] xl:h-[20vh]   "  alt="" /> </span></div>
-                      <div className="flex justify-center content-center self-center">{item.name} x {item.quantity}</div>
+                      <div className="flex justify-center content-center self-center">{item.name} x {item.quantity} </div>
                       <div className="flex justify-center content-center self-center">  ₹{item.price * item.quantity}</div>
                       
                       
@@ -292,7 +325,7 @@ const Checkout = () => {
           </div>
         </div>
 
-        {/* Proceed to Payment Button */}
+       
         <button
           onClick={handlePayment}
           disabled={isProcessing}
@@ -302,7 +335,6 @@ const Checkout = () => {
         </button>
       </div>
 
-      {/* Form Incompletion Popup */}
       {showFormPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-lg">
@@ -318,7 +350,7 @@ const Checkout = () => {
         </div>
       )}
 
-      {/* Order Confirmation Popup */}
+     
       {showPopup && paymentDetails && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-lg">
@@ -328,6 +360,11 @@ const Checkout = () => {
             </p>
             <p>
               <strong>Payment Method:</strong> {paymentDetails.paymentMethod}
+              
+            </p>
+            <p>
+             
+              <strong>Payment_ID</strong> {paymentDetails.razorpayPaymentId}
             </p>
             <p>
               <strong>Shipping Address:</strong>
@@ -343,8 +380,8 @@ const Checkout = () => {
               <strong>Phone:</strong> {address.phone}
             </p>
             <h3 className="mt-4 font-semibold">Cart Summary:</h3>
-            {cart.map((item, index) => (
-              <div key={index} className="flex justify-between">
+            {cart.map((item :any) => (
+              <div key={item.id} className="flex justify-between">
                 <span>
                   {item.name} x {item.quantity}
                 </span>

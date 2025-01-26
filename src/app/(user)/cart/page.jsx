@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useCart } from "@/contexts/CartContext"; // Import CartContext
-import {  Trash } from "lucide-react"; // Trash icon to remove items
+import { useCart } from "@/contexts/CartContext"; 
+import {  Trash } from "lucide-react"; 
 import Link from "next/link";
 import gsap from "gsap";
 import Navbar from "@/components/Navbar";
@@ -11,29 +11,29 @@ import Router from "next/router";
 
 export default function CartPage() {
   const { user } = useAuth();
-  const { cart, removeFromCart, loading } = useCart(); // Get cart items and functions from CartContext
+  const { cart, removeFromCart, loading } = useCart(); 
   const textRef = useRef(null);
   const [loadingx, setLoadingx] = useState(true);
   const router =Router
 
-  // Simulate a loading screen
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoadingx(false);
-    }, 20); // Loading screen duration: 2 seconds
+    }, 20);
 
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     if (!user) {
-      router.push("/login"); // Redirect to login page if user is not logged in
+      router.push("/login");
     }
   }, [user, router]);
 
   useEffect(() => {
     if (!loading && textRef.current) {
-      // GSAP animation: move upward and fade in
+      
       gsap.fromTo(
         textRef.current,
         { y: 50, opacity: 0 },
@@ -46,19 +46,19 @@ export default function CartPage() {
   
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0); // Calculate total price
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0); 
   };
   const calculatemrpTotal = () => {
-    return cart.reduce((total, item) => total + item.pricel * item.quantity, 0); // Calculate total price
+    return cart.reduce((total, item) => total + item.pricel * item.quantity, 0); 
   };
 
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading while cart data is fetched
+    return <div>Loading...</div>; 
   }
 
   return (
-    <div className="">  <Navbar/>
+    <div className="">  
     
     <div className=" px-[10vw] h-full mt-10 ">
      
@@ -98,18 +98,15 @@ export default function CartPage() {
                     />
                     <div>
                       <h2 className="text-lg font-semibold font-serif xl:px">{item.title}</h2>
+                
                       <p className="text-sm text-gray-600">
                         Quantity: {item.quantity}
                       </p>
-<<<<<<< HEAD
                       <p className="text-sm text-gray-600">
                         Size: {item.size}
                       </p>
                       <p className="text-sm text-gray-600">Price: ₹{item.price}</p>
                       <p className="text-sm text-gray-600">Mrp:{item.pricel}</p>
-=======
-                      <p className="text-sm text-gray-600">Price: ₹{item.price}</p>
->>>>>>> f478c95bf734807d14dacbfa6b94968d65d5a27c
                     </div>
                   </div>
                   <button
@@ -120,20 +117,8 @@ export default function CartPage() {
                   </button>
                 </li>
               ))}
-<<<<<<< HEAD
          
             
-=======
-            </ul>
-            <div className="mt-6 flex justify-between items-center">
-              <span className="text-2xl font-semibold">Total: ₹{calculateTotal().toFixed(2)}</span>
-              <button
-                className="px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-700 transition"
-              >
-                Checkout
-              </button>
-            </div>
->>>>>>> f478c95bf734807d14dacbfa6b94968d65d5a27c
           </div>
           <div className="mt-8 ">
             <div className="text-xl font-bold f bg-gray-200  flex justify-between sm:justify-end sm:gap-[4vw] h-[10vh] content-center items-center self-center px-[2vw]  "> 
@@ -141,7 +126,7 @@ export default function CartPage() {
                 <p className="text-green-500 text-medium">Savings:</p> </div>
               <div>₹{calculateTotal().toFixed(2)}
                 
-                <p className="text-green-500 text-medium">{calculatemrpTotal()-calculateTotal()}.00</p>
+                <p className="text-green-500 text-medium">₹{calculatemrpTotal()-calculateTotal()}.00</p>
               </div>
             </div>
             
@@ -150,11 +135,11 @@ export default function CartPage() {
            
           </div>
          <div className=" flex-col content-center items-center self-center justify-center   xl:pl-[60vw]  md:pl-[30vw]">
-        <Link href="/checkout"> <button className="bg-green-500 text-white px-4 hover:bg-amber-400  py-2 rounded-md mt-4 w-full">
+        <Link href="/checkout"> <button className="bg-green-500 text-white px-4 font-semibold font-serif hover:bg-amber-400  py-2 rounded-md mt-4 w-full">
               Checkout
             </button></Link>
         
-        <Link href ="/products"><button className="bg-green-500 text-white px-4 py-2   hover:bg-amber-400 rounded-md mt-4 w-full">
+        <Link href ="/products"><button className="bg-green-500 text-white px-4 py-2  font-serif font-semibold  hover:bg-amber-400 rounded-md mt-4 w-full">
               Continue Shopping
             </button></Link>
          
