@@ -1,12 +1,7 @@
 "use client"
 
-import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
-import ViewCanvas from "@/components/ViewCanvas";
-import TestimonialSlider from "@/components/testimonials-slider"
 import Hom from "@/components/Hom"
-import { Canvas } from '@react-three/fiber';
-import Herojj from "@/components/Herojj"
 import Footer from "@/components/Footer";
 import Content from "@/components/Content";
 
