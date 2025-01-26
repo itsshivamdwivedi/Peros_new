@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import { ShoppingCart, UserCircle2, Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -11,7 +12,7 @@ const Navbar = () => {
 
   const menuList = [
     { name: "Home", link: "/" },
-    { name: "About", link: "/about-us" },
+    { name: "About", link: "/about" },
     { name: "Contact", link: "/contact-us" },
   ];
 

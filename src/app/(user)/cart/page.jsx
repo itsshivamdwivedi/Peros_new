@@ -8,6 +8,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import Navbar from "@/components/Navbar";
 import Router from "next/router";
+import Footer from "@/components/Footer";
 
 export default function CartPage() {
   const { user } = useAuth();
@@ -157,7 +158,7 @@ export default function CartPage() {
 
 
 
-      
+      <Footer/>
   
      
       

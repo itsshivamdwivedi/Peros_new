@@ -11,6 +11,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Timestamp } from "firebase/firestore"; 
 import { doc, setDoc, addDoc, collection, arrayUnion } from "firebase/firestore";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 
 
@@ -634,6 +635,7 @@ const Checkout = () => {
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 };
