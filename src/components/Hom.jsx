@@ -19,7 +19,7 @@ export default function App() {
   return (
     <div
       style={{
-        height: "200vh",
+        height: "100vh",
         width: "full",
         position: "relative",
         overflow: "hidden",

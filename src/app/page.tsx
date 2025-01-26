@@ -7,6 +7,7 @@ import TestimonialSlider from "@/components/testimonials-slider"
 import Hom from "@/components/Hom"
 import { Canvas } from '@react-three/fiber';
 import Herojj from "@/components/Herojj"
+import Content from "@/components/Content";
 
 const testimonials = [
     {
@@ -80,7 +81,7 @@ export default function Home(){
       <Navbar/>
      
       <Hom/>
-     
+     <Content />
       </div>
     
 

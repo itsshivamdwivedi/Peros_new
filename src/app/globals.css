@@ -2,16 +2,147 @@
 @tailwind components;
 @tailwind utilities;
 
-/* styles/globals.css */
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 100vh;
+  padding: 10px;
+}
+
+
+.canvas-container {
+  height: 70vh;
+  width: 70vw;
+}
+
 @media (max-width: 768px) {
   .canvas-container {
     height: 60vh;
     width: 80vw;
   }
 }
+
 @media (max-width: 480px) {
   .canvas-container {
     height: 50vh;
     width: 90vw;
+  }
+}
+
+
+.text-40xl {
+  font-size: 20rem;
+}
+
+@media (max-width: 768px) {
+  .text-40xl {
+    font-size: 12rem; 
+  }
+}
+
+@media (max-width: 480px) {
+  .text-40xl {
+    font-size: 8rem; 
+  }
+}
+
+.text-8xl {
+  font-size: 6rem; 
+}
+
+@media (max-width: 480px) {
+  .text-8xl {
+    font-size: 4rem; 
+  }
+}
+
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: white;
+  width: 140px;
+  height: 80px; 
+  font-size: 2rem; 
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .circle {
+    width: 120px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .circle {
+    width: 100px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}
+
+@keyframes slide-in-middle-then-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-text {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.animate-on-scroll.active {
+  animation: slide-in-middle-then-left 2s ease-out forwards;
+}
+
+.animate-text-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.animate-text-on-scroll.active {
+  animation: fade-in-text 1.8s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+
+@media (min-width: 768px) {
+  .flex-wrap {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .flex-wrap {
+    flex-wrap: wrap;
   }
 }
