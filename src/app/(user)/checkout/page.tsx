@@ -13,6 +13,10 @@ import { doc, setDoc, addDoc, collection, arrayUnion } from "firebase/firestore"
 import Link from "next/link";
 
 
+
+
+
+
 type AddressDetails = {
   firstName: string;
   lastName: string;
@@ -24,12 +28,22 @@ type AddressDetails = {
   [key: string]: string; 
 };
 
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+  size: string;
+  pricel: number;
+}
+
 type PaymentDetails = {
   orderId: string;
   paymentMethod: "COD" | "Razorpay"; // specify the possible values for paymentMethod
   razorpayPaymentId?: string; // razorpayPaymentId is optional
   address: AddressDetails;
-  cart: any[];
+  cart: CartItem[];
   subtotal: number;
   mrpTotal:number;
   userEmail :string;
@@ -43,7 +57,7 @@ declare global {
 }
 
 const Checkout = () => {
-  const { cart } = useCart();
+  const { cart, removeFromCart } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const router =Router
   const { user } = useAuth();
@@ -80,10 +94,7 @@ const Checkout = () => {
     const nameRegex = /^[a-zA-Z\s]+$/; // Regex for only letters and spaces
     return nameRegex.test(name);
   };
-  const validatePhone = (phone: string): boolean => {
-    const phoneRegex = /^\d{10}$/; // Regex for 10-digit phone number
-    return phoneRegex.test(phone);
-  };
+  
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /\S+@\S+\.\S+/; // Basic email regex
@@ -148,6 +159,13 @@ const Checkout = () => {
       { opacity: 1, y: 0, duration: 1, stagger: 0.1 }
     );
   }, []);
+
+  function validatePhone(phone: string): boolean {
+    
+    const phoneRegex = /^[789]\d{9}$/;
+    return phoneRegex.test(phone); 
+  }
+  
   
 
 
@@ -557,7 +575,7 @@ const Checkout = () => {
 
       {/* Order Confirmation Popup */}
       {showPopup && paymentDetails && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center mt-[5vh] bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-lg">
             <h2 className="text-xl font-semibold mb-4 font-serif">Order Confirmed!</h2>
             <p>
@@ -585,7 +603,7 @@ const Checkout = () => {
               <strong>Phone:</strong> {address.phone}
             </p>
             <h3 className="mt-4 font-semibold">Cart Summary:</h3>
-            {cart.map((item :any) => (
+            {cart.map((item :CartItem) => (
               <div key={item.id} className="flex justify-between">
                 <span>
                   {item.name} x {item.quantity}
@@ -601,12 +619,18 @@ const Checkout = () => {
               <span>Savings</span>
               <span>₹{mrpTotal-subtotal}</span>
             </div>
-            <button
+           
+            
+        <Link href ="/account"> <button
               className="bg-green-500 hover:bg-orange-400 text-white px-4 py-2 rounded-md mt-4"
-              onClick={() => setShowPopup(false)}
+              onClick={() => {
+                
+                cart.forEach((item: CartItem) => removeFromCart(item.id)); 
+                setShowPopup(false);
+              }}
             >
               Close
-            </button>
+            </button> </Link>
           </div>
         </div>
       )}
