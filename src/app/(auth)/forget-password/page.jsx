@@ -2,16 +2,16 @@
 
 import { useAuth } from "@/contexts/AuthContext";
 import { auth } from "@/lib/firebase";
-import { createUser } from "@/lib/firestore/user/write";
+// import { createUser } from "@/lib/firestore/user/write";
 import { Button } from "@nextui-org/react";
 import {
-  createUserWithEmailAndPassword,
+  // createUserWithEmailAndPassword,
   sendPasswordResetEmail,
-  updateProfile,
+  // updateProfile,
 } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function Page() {

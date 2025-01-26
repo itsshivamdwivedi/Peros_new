@@ -1,7 +1,7 @@
 "use client";
 
 import AuthContextProvider, { useAuth } from "@/contexts/AuthContext";
-import CartContext, { CartProvider } from "@/contexts/CartContext"
+import  { CartProvider } from "@/contexts/CartContext"
 import { CircularProgress} from "@nextui-org/react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";

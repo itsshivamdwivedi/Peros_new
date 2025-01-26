@@ -109,9 +109,9 @@ const Content = () => {
           </h2>
         </div>
       </section>
-
-      {/* Features Section */}
-      <section className="flex justify-center items-center h-full m-8">
+console.log('AOS initialized');
+console.log('Component rendered');
+git       <section className="flex justify-center items-center h-full m-8">
         <div className="flex gap-8 flex-wrap justify-center">
           {Array.from({ length: 4 }).map((_, index) => (
             <div className="text-center" key={index}>
