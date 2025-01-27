@@ -277,8 +277,10 @@ const Products: React.FC = () => {
           <div className="h-[500px]  relative">
             <Image
               src={currentImage}
+              width={400}
+              height={400}
               alt={selectedVariant.name}
-              fill
+              // fill
               className="object-cover rounded-md "
               
 
@@ -287,6 +289,8 @@ const Products: React.FC = () => {
           <div className="flex mt-4">
             {selectedVariant.images.map((image, index) => (
               <Image
+              width={80}
+              height={80}
                 key={`${selectedVariant.id}-image-${index}`}
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
