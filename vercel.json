@@ -1,9 +1,14 @@
 {
-    "builds": [
-      {
-        "src": "src/page.tsx",
-        "use": "@vercel/node"
-      }
-    ]
-  }
-  
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
