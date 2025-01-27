@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ScrollControls, Environment, useScroll } from "@react-three/drei";
-import { Model } from "./Model";
+import { Model } from "./Model2";
 import * as THREE from "three";
 
 export default function App() {
