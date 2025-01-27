@@ -335,7 +335,6 @@
 //     return <Model ref={modelRef} position={[0, 0, 0]} />;
 //   }
 // );
-
 "use client";
 
 import React, { useRef, useState, useEffect, useCallback, useMemo } from "react";
@@ -344,6 +343,14 @@ import { ScrollControls, Environment, useScroll } from "@react-three/drei";
 import { Model } from "./Model2"; 
 import * as THREE from "three";
 
+// Debounce function to optimize scroll event handling
+const debounce = (func, delay) => {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), delay);
+  };
+};
 
 const AppComponent = () => {
   const modelRef = useRef();
@@ -417,7 +424,7 @@ const AppComponent = () => {
   );
 };
 
-AppComponent.displayName = "App"; 
+AppComponent.displayName = "App";
 
 const AnimatedModel = ({
   modelRef,
@@ -434,12 +441,16 @@ const AnimatedModel = ({
   const numSections = 5;
   const [scrolling, setScrolling] = useState(false);
 
-  const updateSection = useCallback(() => {
-    const newSection = Math.floor(scroll.offset * numSections);
-    if (newSection !== currentSection) {
-      setCurrentSection(newSection);
-    }
-  }, [scroll.offset, currentSection, setCurrentSection, numSections]);
+  // Optimized scroll event handler
+  const updateSection = useCallback(
+    debounce(() => {
+      const newSection = Math.floor(scroll.offset * numSections);
+      if (newSection !== currentSection) {
+        setCurrentSection(newSection);
+      }
+    }, 50), // Delay to avoid frequent updates
+    [scroll.offset, currentSection, setCurrentSection, numSections]
+  );
 
   useEffect(() => {
     if (scrolling) {
@@ -510,6 +521,6 @@ const AnimatedModel = ({
   return renderModel;
 };
 
-AnimatedModel.displayName = "AnimatedModel"; 
+AnimatedModel.displayName = "AnimatedModel";
 
 export default AppComponent;
