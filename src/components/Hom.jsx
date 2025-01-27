@@ -1,4 +1,4 @@
-
+"use client";
 
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -106,26 +106,34 @@ function AnimatedModel({
     }
   };
 
-
   useEffect(() => {
-    window.addEventListener('wheel', handleScroll);
-    return () => window.removeEventListener('wheel', handleScroll);
-  }, [scrolling]);
-
+    const handleTouchStart = () => setScrolling(true);
+    const handleTouchEnd = () => setScrolling(false);
+  
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
+  
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
+  
   useFrame((state, delta) => {
-    
-    const sectionRatio = currentSection / numSections;
-
-   
+    const sectionRatio = scroll.offset; // Directly use scroll.offset for responsiveness
+    const newSection = Math.floor(scroll.offset * numSections);
+    if (newSection !== currentSection) {
+      setCurrentSection(newSection);
+    }
+  
     targetRotation.current.set(
-      Math.PI * 2 * sectionRatio,  
+      Math.PI * 2 * sectionRatio,
       Math.PI * 2 * sectionRatio,
       0
     );
-    targetScale.current = 2 - sectionRatio * 1.3; 
-    targetPosition.current.set(0, -0.5 * (targetScale.current - 1), 0); 
-
-    
+    targetScale.current = 2 - sectionRatio * 1.3;
+    targetPosition.current.set(0, -0.5 * (targetScale.current - 1), 0);
+  
     if (modelRef.current) {
       modelRef.current.rotation.x = THREE.MathUtils.lerp(
         modelRef.current.rotation.x,
@@ -146,12 +154,10 @@ function AnimatedModel({
         delta * 2
       );
       modelRef.current.position.lerp(targetPosition.current, delta * 2);
-
-
+  
       const { x, y, z } = modelRef.current.position;
       setPosition({ x, y, z });
-
-     
+  
       if (currentSection === numSections - 1) {
         onComplete();
       }
