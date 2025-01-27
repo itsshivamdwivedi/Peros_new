@@ -1,10 +1,11 @@
 
-"use client";
+
 "use client";
 import React, { forwardRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export const Model = forwardRef((props, ref) => {
+  Model.displayName ="Models"
   const { nodes, materials } = useGLTF('/peanutbutterjar2.glb');
 
   return (
