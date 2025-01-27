@@ -274,12 +274,14 @@ const Products: React.FC = () => {
       <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col lg:flex-row gap-16 mt-4 ">
       
         <div className="w-full lg:w-1/2  lg:sticky top-20 h-max" ref={leftBoxRef}>
-          <div className="h-[500px] relative">
+          <div className="h-[500px]  relative">
             <Image
               src={currentImage}
               alt={selectedVariant.name}
               fill
-              className="object-cover rounded-md"
+              className="object-cover rounded-md "
+              
+
             />
           </div>
           <div className="flex mt-4">

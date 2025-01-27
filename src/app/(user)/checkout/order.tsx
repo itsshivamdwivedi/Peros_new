@@ -6,15 +6,19 @@ import { doc, getDoc, updateDoc, onSnapshot, Timestamp } from "firebase/firestor
 import { useAuth } from "@/contexts/AuthContext";
 import { jsPDF } from "jspdf";
 
-import LogoutButton from "@/components/LogoutButton";
+// import LogoutButton from "@/components/LogoutButton";
+
+
+
+
 
 const Orders = () => {
-  const { user } = useAuth(); // Get authenticated user
+  const { user } = useAuth(); 
   const [orders, setOrders] = useState<any[]>([]); // State to store orders
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState<string | null>(null); // Error state
-  const [filteredOrders, setFilteredOrders] = useState<any[]>([]); // State for filtered orders
-  const [searchQuery, setSearchQuery] = useState<string>(""); // Search query
+  // const [filteredOrders, setFilteredOrders] = useState<any[]>([]); // State for filtered orders
+  // const [searchQuery, setSearchQuery] = useState<string>(""); // Search query
 
   useEffect(() => {
     if (!user?.uid) {
@@ -143,28 +147,28 @@ const Orders = () => {
     doc.save(`Invoice_${order.orderId}.pdf`);
   };
 
-  // Admin Approval and Cancellation of Return Request
-  const handleAdminApproval = async (orderId: string, approve: boolean) => {
-    try {
-      const userRef = doc(db, "users", user.uid); // Assume admin can approve/cancel for any user
-      const userSnap = await getDoc(userRef);
+  // // Admin Approval and Cancellation of Return Request
+  // const handleAdminApproval = async (orderId: string, approve: boolean) => {
+  //   try {
+  //     const userRef = doc(db, "users", user.uid); // Assume admin can approve/cancel for any user
+  //     const userSnap = await getDoc(userRef);
 
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
-        const orders = userData?.orders || [];
-        const updatedOrders = orders.map((order: any) => {
-          if (order.orderId === orderId && order.status === "Return Requested") {
-            order.status = approve ? "Return Approved" : "Return Cancelled";
-          }
-          return order;
-        });
+  //     if (userSnap.exists()) {
+  //       const userData = userSnap.data();
+  //       const orders = userData?.orders || [];
+  //       const updatedOrders = orders.map((order: any) => {
+  //         if (order.orderId === orderId && order.status === "Return Requested") {
+  //           order.status = approve ? "Return Approved" : "Return Cancelled";
+  //         }
+  //         return order;
+  //       });
 
-        await updateDoc(userRef, { orders: updatedOrders });
-      }
-    } catch (err) {
-      console.error("Error approving/cancelling return:", err);
-    }
-  };
+  //       await updateDoc(userRef, { orders: updatedOrders });
+  //     }
+  //   } catch (err) {
+  //     console.error("Error approving/cancelling return:", err);
+  //   }
+  // };
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4 ">

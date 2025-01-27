@@ -1,6 +1,6 @@
 "use client";
 
-import Head from "next/head";
+
 import React, { useEffect, useRef, useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { gsap } from "gsap";
@@ -9,9 +9,9 @@ import { db } from "@/lib/firebase";// Assuming you've already exported db from 
 import Router from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
 import { Timestamp } from "firebase/firestore"; 
-import { doc, setDoc, addDoc, collection, arrayUnion } from "firebase/firestore";
+import { doc, setDoc,   arrayUnion } from "firebase/firestore";
 import Link from "next/link";
-import Footer from "@/components/Footer";
+
 
 
 
@@ -355,7 +355,7 @@ const Checkout = () => {
               { name: "state", label: "State" },
               { name: "pincode", label: "Pincode" },
             ].map((field, idx) => (
-              <div className="relative">
+              <div className="relative"key={field.name || idx}>
               <input
                 type={field.type || "text"}
                 name={field.name}
