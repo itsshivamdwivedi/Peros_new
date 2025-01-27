@@ -14,7 +14,7 @@ export default function Layout({ children }) {
         <CartProvider>
 
         <UserChecking>
-          <section className="min-h-screen">{children}</section>
+          <section className="h-screen">{children}</section>
         </UserChecking>
         </CartProvider>
       </AuthContextProvider>
