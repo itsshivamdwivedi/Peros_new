@@ -335,6 +335,7 @@
 //     return <Model ref={modelRef} position={[0, 0, 0]} />;
 //   }
 // );
+
 "use client";
 
 import React, { useRef, useState, useEffect, useCallback, useMemo } from "react";
@@ -344,7 +345,7 @@ import { Model } from "./Model2";
 import * as THREE from "three";
 
 
-const App = React.memo(() => {
+const AppComponent = () => {
   const modelRef = useRef();
   const [animationComplete, setAnimationComplete] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0, z: 0 });
@@ -414,100 +415,101 @@ const App = React.memo(() => {
       </div>
     </div>
   );
-});
+};
 
-const AnimatedModel = React.memo(
-  ({
-    modelRef,
-    onComplete,
-    setPosition,
-    currentSection,
-    setCurrentSection,
-  }) => {
-    const scroll = useScroll();
-    const targetRotation = useRef(new THREE.Vector3(0, 0, 0));
-    const targetScale = useRef(1);
-    const targetPosition = useRef(new THREE.Vector3(0, 0, 0));
+AppComponent.displayName = "App"; 
 
-    const numSections = 5; // Reduced number of sections for optimization
-    const [scrolling, setScrolling] = useState(false);
+const AnimatedModel = ({
+  modelRef,
+  onComplete,
+  setPosition,
+  currentSection,
+  setCurrentSection,
+}) => {
+  const scroll = useScroll();
+  const targetRotation = useRef(new THREE.Vector3(0, 0, 0));
+  const targetScale = useRef(1);
+  const targetPosition = useRef(new THREE.Vector3(0, 0, 0));
 
-    // Memoize the updateSection function to prevent unnecessary re-creations
-    const updateSection = useCallback(() => {
-      const newSection = Math.floor(scroll.offset * numSections);
-      if (newSection !== currentSection) {
-        setCurrentSection(newSection);
-      }
-    }, [scroll.offset, currentSection, setCurrentSection, numSections]);
+  const numSections = 5;
+  const [scrolling, setScrolling] = useState(false);
 
-    useEffect(() => {
-      if (scrolling) {
-        updateSection();
-        setScrolling(false);
-      }
-    }, [scrolling, updateSection]);
+  const updateSection = useCallback(() => {
+    const newSection = Math.floor(scroll.offset * numSections);
+    if (newSection !== currentSection) {
+      setCurrentSection(newSection);
+    }
+  }, [scroll.offset, currentSection, setCurrentSection, numSections]);
 
-    useEffect(() => {
-      const handleTouchMove = () => setScrolling(true);
+  useEffect(() => {
+    if (scrolling) {
+      updateSection();
+      setScrolling(false);
+    }
+  }, [scrolling, updateSection]);
 
-      window.addEventListener("touchmove", handleTouchMove);
+  useEffect(() => {
+    const handleTouchMove = () => setScrolling(true);
 
-      return () => {
-        window.removeEventListener("touchmove", handleTouchMove);
-      };
-    }, []);
+    window.addEventListener("touchmove", handleTouchMove);
 
-    useFrame((state, delta) => {
-      const sectionRatio = scroll.offset;
-      const newSection = Math.floor(scroll.offset * numSections);
-      if (newSection !== currentSection) {
-        setCurrentSection(newSection);
-      }
+    return () => {
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
 
-      targetRotation.current.set(
-        Math.PI * 2 * sectionRatio,
-        Math.PI * 2 * sectionRatio,
-        0
+  useFrame((state, delta) => {
+    const sectionRatio = scroll.offset;
+    const newSection = Math.floor(scroll.offset * numSections);
+    if (newSection !== currentSection) {
+      setCurrentSection(newSection);
+    }
+
+    targetRotation.current.set(
+      Math.PI * 2 * sectionRatio,
+      Math.PI * 2 * sectionRatio,
+      0
+    );
+    targetScale.current = 2 - sectionRatio * 1.3;
+    targetPosition.current.set(0, -0.5 * (targetScale.current - 1), 0);
+
+    if (modelRef.current) {
+      modelRef.current.rotation.x = THREE.MathUtils.lerp(
+        modelRef.current.rotation.x,
+        targetRotation.current.x,
+        delta * 2
       );
-      targetScale.current = 2 - sectionRatio * 1.3;
-      targetPosition.current.set(0, -0.5 * (targetScale.current - 1), 0);
+      modelRef.current.rotation.y = THREE.MathUtils.lerp(
+        modelRef.current.rotation.y,
+        targetRotation.current.y,
+        delta * 2
+      );
+      modelRef.current.scale.lerp(
+        new THREE.Vector3(
+          targetScale.current,
+          targetScale.current,
+          targetScale.current
+        ),
+        delta * 2
+      );
+      modelRef.current.position.lerp(targetPosition.current, delta * 2);
 
-      if (modelRef.current) {
-        modelRef.current.rotation.x = THREE.MathUtils.lerp(
-          modelRef.current.rotation.x,
-          targetRotation.current.x,
-          delta * 2
-        );
-        modelRef.current.rotation.y = THREE.MathUtils.lerp(
-          modelRef.current.rotation.y,
-          targetRotation.current.y,
-          delta * 2
-        );
-        modelRef.current.scale.lerp(
-          new THREE.Vector3(
-            targetScale.current,
-            targetScale.current,
-            targetScale.current
-          ),
-          delta * 2
-        );
-        modelRef.current.position.lerp(targetPosition.current, delta * 2);
+      const { x, y, z } = modelRef.current.position;
+      setPosition({ x, y, z });
 
-        const { x, y, z } = modelRef.current.position;
-        setPosition({ x, y, z });
-
-        if (currentSection === numSections - 1) {
-          onComplete();
-        }
+      if (currentSection === numSections - 1) {
+        onComplete();
       }
-    });
+    }
+  });
 
-    const renderModel = useMemo(() => {
-      return <Model ref={modelRef} />;
-    }, [modelRef]);
+  const renderModel = useMemo(() => {
+    return <Model ref={modelRef} />;
+  }, [modelRef]);
 
-    return renderModel;
-  }
-);
+  return renderModel;
+};
 
-export default App;
+AnimatedModel.displayName = "AnimatedModel"; 
+
+export default AppComponent;
