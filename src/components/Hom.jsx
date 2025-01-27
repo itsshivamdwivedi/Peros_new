@@ -22,7 +22,8 @@ export default function App() {
         height: "100vh",
         width: "full",
         position: "relative",
-        overflow: "hidden",
+        
+        overflow: animationComplete ? "auto" : "hidden",
       }}
     >
       <div
@@ -120,7 +121,7 @@ function AnimatedModel({
   }, []);
   
   useFrame((state, delta) => {
-    const sectionRatio = scroll.offset; // Directly use scroll.offset for responsiveness
+    const sectionRatio = scroll.offset;
     const newSection = Math.floor(scroll.offset * numSections);
     if (newSection !== currentSection) {
       setCurrentSection(newSection);

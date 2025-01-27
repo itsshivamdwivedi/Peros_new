@@ -6,14 +6,15 @@ import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import AuthContextProvider from "@/contexts/AuthContext";
 import HeaderClientButtons from "@/components/HeaderClientButtons";
+import { link } from "fs";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuList = [
     { name: "Home", link: "/" },
-    { name: "About", link: "/about" },
-    { name: "Contact", link: "/contact-us" },
+    { name: "Products", link: "/products" },
+    // { name: "Contact", link: "/contact-us" },
   ];
 
   return (
@@ -23,6 +24,7 @@ const Navbar = () => {
           <Image
             src="/assets/logo/logo.png"
             alt="Peros Logo"
+            priority
             width={190}
             height={150}
           />
