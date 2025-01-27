@@ -9,6 +9,8 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { v4 as uuidv4 } from "uuid";
 
 
+
+
 type Size = {
   label: string;
   price: number;
@@ -96,7 +98,7 @@ const Products: React.FC = () => {
 
 
   const descriptionRef = useRef<HTMLDivElement>(null);
-  const variantsRef = useRef<HTMLDivElement>(null);
+ 
 
 
   useEffect(() => {
@@ -282,7 +284,7 @@ const Products: React.FC = () => {
           </div>
           <div className="flex mt-4">
             {selectedVariant.images.map((image, index) => (
-              <img
+              <Image
                 key={`${selectedVariant.id}-image-${index}`}
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
@@ -375,28 +377,29 @@ const Products: React.FC = () => {
     </div>
 
     <div className="flex-col flex mt-5 gap-4" ref={descriptionRef}>
-       <div className='sm' >
-                    <p>We created a perfect combination of health deliciousness with roasted peanuts, imported Whey protein and Dark Chocolate. The Whey protein being used is being imported from the world's top dairy based in Europe!</p>
-                  
-                    
-                </div>
-                <div className='sm' >
-                   <p>High Protein Dark Chocolate Peanut Butter has been created carefully for fitness freaks and gym-goers. They simply can't get enough of this perfect creation!! The deliciousness of dark chocolate added to the all-natural peanut paste and imported whey protein makes this product the best addition to a diet, one can ever ask for. High in protein and fibre, and ZERO in trans fat.</p>
-                  
-                    
-                </div>
+       
+                
+                
                 <div className='sm'>
-                    <p>All PINTOLA® Products are made up of the finest grade, fresh and nutritious ingredients from an ISO 22000 Certified and FSSAI approved Factory.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, maiores.</p>
                     
                 </div>
+                
                 <div className='sm'>
-                    <p>We manufacture India’s favorite Nut Butters daily so that you get the freshest product every time you buy one. "Suitable for all age groups".</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, maiores.</p>
                     
                 </div>
+                
                 <div className='sm'>
-                    <p>Ideal for Gym & Fitness Enthusiasts, Athletes & all Foodies!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, maiores.</p>
                     
                 </div>
+                
+                <div className='sm'>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, maiores.</p>
+                    
+                </div>
+                
                 <div className='sm flex gap-1'>
                     <h4 className='font-semibold'>Shelf Life:</h4>
                    <p>9 Months</p>

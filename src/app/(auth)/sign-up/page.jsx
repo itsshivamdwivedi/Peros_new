@@ -7,7 +7,7 @@ import { Button } from "@nextui-org/react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function Page() {
@@ -54,6 +54,11 @@ export default function Page() {
         <div className="flex justify-center">
           <img className="h-12" src="/assets/logo/logo.png" alt="Logo" />
         </div>
+        {user && (
+          <div className="text-center text-green-600">
+            Welcome back, {user.displayName || "User"}!
+          </div>
+        )}
         <div className="flex flex-col gap-3 bg-white md:p-10 p-5 rounded-xl md:min-w-[440px] w-full">
           <h1 className="font-bold text-xl">Sign Up With Email</h1>
           <form

@@ -2,23 +2,25 @@
 
 import { useAuth } from "@/contexts/AuthContext";
 import { auth } from "@/lib/firebase";
-// import { createUser } from "@/lib/firestore/user/write";
 import { Button } from "@nextui-org/react";
-import {
-  // createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  // updateProfile,
-} from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function Page() {
-  const { user } = useAuth();
+  const { user } = useAuth(); 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({});
+
+  useEffect(() => {
+
+    if (user) {
+      router.push("/");
+    }
+  }, [user, router]);
 
   const handleData = (key, value) => {
     setData({
@@ -75,7 +77,7 @@ export default function Page() {
             </Button>
           </form>
           <div className="flex justify-between">
-            <Link href={`/login`}>
+            <Link href={"/login"}>
               <button className="font-semibold text-sm text-blue-700">
                 Sign In
               </button>
