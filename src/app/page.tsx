@@ -61,18 +61,9 @@ export default function Home(){
        
     <main  className="">
     
-        {/* <ViewCanvas />
-      <Hero />
-       <TestimonialSlider testimonials={testimonials} />
-        <h1 className="text-center text-4xl text-semibold
-        ">
-            THis is my home page 
-        </h1> */}
+
         
-      {/* Lighting */}
       
-      
-      {/* Model Component */}
       <div>
       <Navbar/>
      

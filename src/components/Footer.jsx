@@ -119,11 +119,11 @@ const Footer = () => {
 
      
       <div
-        className={`parallax-section absolute top-[50%] left-0 w-full h-[100vh] z-[-1] bg-cover bg-center transition-opacity duration-500 ${
+        className={`parallax-section absolute top-[90%] left-0 w-full h-screen z-[-1] bg-cover bg-center transition-opacity duration-500 ${
           isFooterVisible ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          backgroundImage: "url('/assets/p4.png')",
+          backgroundImage: "url('/assets/footer.png')",
           backgroundAttachment: "fixed",
         }}
       ></div>

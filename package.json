@@ -35,10 +35,12 @@
     "firebase-admin": "^12.5.0",
     "framer-motion": "^11.15.0",
     "gsap": "^3.12.7",
+    "input-otp": "^1.4.2",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.2",
     "lucide-react": "^0.468.0",
     "next": "^14.2.4",
+    "next-image-export-optimizer": "^1.18.0",
     "nth-check": "^2.0.1",
     "razorpay": "^2.9.5",
     "react": "^18.3.1",
@@ -53,6 +55,7 @@
     "swiper": "^11.1.15",
     "swr": "^2.2.5",
     "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
     "three": "^0.171.0",
     "uuid": "^11.0.5",
     "zustand": "^5.0.2"
@@ -60,6 +63,7 @@
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@types/aos": "^3.0.7",
+    "@types/firebase": "^2.4.32",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.17.10",
     "@types/react": "^18.3.18",
