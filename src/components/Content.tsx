@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; 
 import "../app/globals.css";
-import Image from "next/image";
+
 import ExportedImage from "next-image-export-optimizer";
 import { useState } from "react";
 const Content = () => {
@@ -139,7 +139,7 @@ const Content = () => {
               <u>Our Vision</u>
             </p>
             <p className="text-xl leading-relaxed text-white">
-               Peros is more than just a peanut butter brand--it's a commitment to health , fitness, and survival of the fittest. As we grow, we plan to introduce more healthy and delicious products that align with our mission of promoting a stranger , healthier lifestyle.
+               Peros is more than just a peanut butter brand--its a commitment to health , fitness, and survival of the fittest. As we grow, we plan to introduce more healthy and delicious products that align with our mission of promoting a stranger , healthier lifestyle.
             </p>
             <p className="text-xl text-white"> 
               Join the Peros Revolution 

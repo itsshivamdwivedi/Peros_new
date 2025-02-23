@@ -11,7 +11,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Timestamp } from "firebase/firestore"; 
 import { doc, setDoc,   arrayUnion } from "firebase/firestore";
 import Link from "next/link";
-import OtpLogin from "@/components/ui/OtpLogin";
+
 
 
 
@@ -340,7 +340,7 @@ const Checkout = () => {
   return (
    
     <div className="">
-        <OtpLogin />
+      
     
      
       <div ref={checkoutRef} className="p-8">
