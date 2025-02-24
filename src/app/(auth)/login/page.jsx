@@ -29,6 +29,14 @@ export default function Page() {
   };
 
   const handleLogin = async () => {
+    if (!data?.email) {
+      toast.error("Please enter your email first.");
+      return;
+    }
+    if (!data?.password) {
+      toast.error("Please enter your password.");
+      return;
+    }
     setIsLoading(true);
     try {
       await signInWithEmailAndPassword(auth, data?.email, data?.password);

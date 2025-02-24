@@ -48,7 +48,7 @@ export default function HeaderClientButtons() {
               title="My Cart"
               className="h-8 w-8 flex justify-center items-center rounded-full hover:bg-gray-50"
             >
-              <ShoppingCart size={14} />
+              <ShoppingCart size={28} />
             </button>
           </Badge>
         )}
@@ -57,7 +57,7 @@ export default function HeaderClientButtons() {
             title="My Cart"
             className="h-8 w-8 flex justify-center items-center rounded-full hover:bg-gray-50"
           >
-            <ShoppingCart size={14} />
+            <ShoppingCart size={28} />
           </button>
         )}
       </Link>

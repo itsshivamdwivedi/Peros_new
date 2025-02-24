@@ -5,6 +5,7 @@ import "../app/globals.css";
 
 import ExportedImage from "next-image-export-optimizer";
 import { useState } from "react";
+import Link from "next/dist/client/link";
 const Content = () => {
   useEffect(() => {
     AOS.init({
@@ -201,9 +202,13 @@ const Content = () => {
             Dark Chocolate
             Rs.299
           </h3>
-          <button className="bg-white text-black py-2 px-6 text-lg font-semibold rounded-full hover:bg-gray-200 transition-colors">
+          <Link href="/products">
+          
+          <button className="bg-white text-black py-2 px-6 text-lg font-semibold rounded-full hover:bg-gray-200 transition-colors"
+          >
             Buy Now
           </button>
+          </Link>
         </div>
           </div>
         </div>
@@ -231,26 +236,29 @@ const Content = () => {
           </h2>
         </div>
       </section>
-      {/* <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
   <ExportedImage
-    src="/assets/30a1.png"
+  
+    src="/assets/1.png"
+    unoptimized={true}
+    alt="shivam"
+    width={220}
+    height={100}
+    objectFit="cover"
+    className="block p-0 m-0 leading-none "
+    // data-aos="slide-left"
+  />
+  <ExportedImage
+    src="/assets/2.png"
     unoptimized={true}
     alt="shivam"
     width={220}
     height={100}
     objectFit="cover"
     className="block p-0 m-0 leading-none"
+    // data-aos="slide-right"
   />
-  <ExportedImage
-    src="/assets/30b1.png"
-    unoptimized={true}
-    alt="shivam"
-    width={220}
-    height={100}
-    objectFit="cover"
-    className="block p-0 m-0 leading-none"
-  />
-</div> */}
+</div>
 
 
       <section className="flex justify-center items-center h-full m-8">

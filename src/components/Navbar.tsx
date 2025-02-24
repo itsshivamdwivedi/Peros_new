@@ -43,7 +43,7 @@ const Navbar = () => {
         ))}
         <Link
           href="/products"
-          className="bg-[#D9F99D] text-black px-4 py-2 rounded-md hover:bg-green-300 transition"
+          className="bg-black text-white px-4 py-2 rounded-md hover:bg-green-300 transition"
         >
           Buy
         </Link>
@@ -59,12 +59,12 @@ const Navbar = () => {
             title="My Account"
             className="h-8 w-8 flex justify-center items-center rounded-full hover:bg-gray-50"
           >
-            <UserCircle2 size={14} />
+            <UserCircle2 size={28} />
           </button>
         </Link>
         {/* <Link href="/cart">
           <button className="h-8 w-8 flex justify-center items-center rounded-full hover:bg-gray-50">
-            <ShoppingCart size={14} />
+            <ShoppingCart size={34} />
           </button>
         </Link> */}
         <AuthContextProvider>
@@ -77,7 +77,7 @@ const Navbar = () => {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="p-2 rounded-full hover:bg-gray-200 hover:text-[#D9F99D] transition"
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileMenuOpen ? <X size={34} /> : <Menu size={34} />}
         </button>
       </div>
 
