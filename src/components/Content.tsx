@@ -52,12 +52,15 @@ const Content = () => {
    
       <section className="flex items-center justify-center bg-gradient-radial from-white via-blue-200 to-blue-400 h-screen scroll-animate hidden sm:flex">
         <div className="max-w-full space-x-16 flex flex-col md:flex-row w-full overflow-hidden">
-          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1500">
+          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-right">
             <h2 className="text-5xl font-bold text-green-800">Dark Chocolate</h2>
             <h2 className="text-5xl font-bold text-green-800">Crunchy</h2>
-            <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition">
+            <Link href={"/products"}>
+            
+            <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition" >
               Buy Now
             </button>
+            </Link>
           </div>
           <div className="md:w-1/2 w-full p-8" data-aos="slide-left" data-aos-duration="1500" data-aos-delay="200">
             <img src="/assets/creamy.png" alt="Product 2" className="w-full h-full" />
@@ -69,14 +72,17 @@ const Content = () => {
       {/* Product 2 */}
       <section className="flex items-center justify-center bg-gradient-radial from-white via-blue-200 to-blue-400 h-screen scroll-animate hidden sm:flex">
         <div className="max-w-full space-x-16 flex flex-col md:flex-row w-full overflow-hidden">
-          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1500">
+          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-right" >
             <h2 className="text-5xl font-bold text-green-800">Dark Chocolate</h2>
             <h2 className="text-5xl font-bold text-green-800">Crunchy</h2>
-            <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition">
+            <Link href={"/products"}>
+            
+            <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition" >
               Buy Now
             </button>
+            </Link>
           </div>
-          <div className="md:w-1/2 w-full p-8" data-aos="slide-left" data-aos-duration="1500" data-aos-delay="200">
+          <div className="md:w-1/2 w-full p-8" data-aos="slide-left">
             <img src="/assets/creamy.png" alt="Product 2" className="w-full h-full" />
           </div>
         </div>
@@ -88,12 +94,15 @@ const Content = () => {
           <div className="md:w-1/2 w-full p-8" data-aos="slide-right" data-aos-duration="1200">
             <img src="/assets/classic.png" alt="Product 3" className="w-full h-full" />
           </div>
-          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-left" data-aos-delay="200" data-aos-duration="1200">
+          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-left">
             <h2 className="text-5xl font-bold text-green-800">Dark Chocolate</h2>
             <h2 className="text-5xl font-bold text-green-800">Classic</h2>
-            <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition">
+            <Link href={"/products"}>
+            
+            <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition" >
               Buy Now
             </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -101,14 +110,14 @@ const Content = () => {
       {/* Product 4 */}
       <section className="scroll-animate bg-black">
   <div className="flex flex-col md:flex-row rounded-lg w-full overflow-hidden">
-    <div className="md:w-1/2 w-full p-4 md:p-8" data-aos="slide-right" data-aos-duration="1200">
+    <div className="md:w-1/2 w-full p-4 md:p-8" data-aos="slide-right" >
       <img
         src="/assets/home-images/spoonbg.png"
         alt="Product 4"
         className="w-full h-48 md:h-80 object-cover rounded-lg sticky-image"
       />
     </div>
-    <div className="md:w-1/2 w-full p-6 md:p-12 flex flex-col justify-center items-start space-y-4 md:space-y-6 mb-6 md:mb-12" data-aos="fade-up" data-aos-delay="200">
+    <div className="md:w-1/2 w-full p-6 md:p-12 flex flex-col justify-center items-start space-y-4 md:space-y-6 mb-6 md:mb-12" data-aos="fade-up" >
       <p className="text-xl md:text-2xl text-white items-center">
         <u>The exclusivity</u>
       </p>
@@ -135,7 +144,7 @@ const Content = () => {
       <section className="scroll-animate bg-black md:hidden">
         <div className="flex flex-col md:flex-row rounded-lg w-full overflow-hidden ">
       
-          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start space-y-6 mb-12" data-aos="fade-up" data-aos-delay="200">
+          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start space-y-6 mb-12" data-aos="fade-up" >
             <p className="text-2xl text-white items-center">
               <u>Our Vision</u>
             </p>
@@ -198,7 +207,7 @@ const Content = () => {
               ))}
             </div>
             <div className="md:w-1/2 w-full p-8 text-center md:text-left">
-          <h3 className="text-2xl md:text-5xl font-bold text-white mb-6 text-center">
+          <h3 className="text-2xl md:text-5xl font-bold text-white mb-6 ">
             Dark Chocolate
             Rs.299
           </h3>

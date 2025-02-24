@@ -41,7 +41,7 @@ export default function HeaderClientButtons() {
           <Badge
             variant="solid"
             size="sm"
-            className="text-white bg-red-500 text-[8px]"
+            className="text-white bg-red-500 text-[12px]"
             content={data?.carts?.length ?? 0}
           >
             <button
