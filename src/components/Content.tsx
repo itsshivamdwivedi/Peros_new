@@ -16,9 +16,9 @@ const Content = () => {
 
   }, []);
   const images = [
-    "/assets/jar.png", 
-    "/assets/jar.png",
-    "/assets/jar.png",
+    "/assets/Jar.png", 
+    "/assets/Jar.png",
+    "/assets/Jar.png",
   ];
   
 
@@ -175,7 +175,7 @@ const Content = () => {
         {/* Text Content */}
       
 
-        {/* Image Carousel */}
+       
         <div className="md:w-1/2 w-full p-8 flex flex-col items-center">
           <div className="relative w-full max-w-md">
             <img
@@ -184,7 +184,7 @@ const Content = () => {
               className="w-full h-auto object-cover rounded-lg transition-opacity duration-300"
             />
             
-            {/* Dots Indicator */}
+         
             <div className="flex justify-center space-x-3 mt-8">
               {images.map((_, index) => (
                 <button
