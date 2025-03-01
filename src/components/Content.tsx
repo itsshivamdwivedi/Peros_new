@@ -112,7 +112,7 @@ const Content = () => {
       </section>
 
       {/* Product 4 */}
-      <section className="scroll-animate bg-black">
+      <section className="scroll-animate bg-black pt-80 pb-80">
   <div className="flex flex-col md:flex-row rounded-lg w-full overflow-hidden">
     <div className="md:w-1/2 w-full p-4 md:p-8" data-aos="slide-right" >
       <img
@@ -136,7 +136,7 @@ const Content = () => {
          <ExportedImage src="/assets/gymgirl.png"
          unoptimized={true}
          alt ="shivam"
-         width={420}
+         width={440}
          height={400}
         objectFit="cover"  
          
@@ -145,7 +145,7 @@ const Content = () => {
         </div>
       </div>
       {/* For mobile */}
-      <section className="scroll-animate bg-black md:hidden">
+      <section className="scroll-animate bg-black md:hidden pb-10">
         <div className="flex flex-col md:flex-row rounded-lg w-full overflow-hidden ">
       
           <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start space-y-6 mb-12" data-aos="fade-up" >
@@ -162,22 +162,19 @@ const Content = () => {
         </div>
       </section>
     {/*  For mobile devices */}
-      <div>
-        <div className="image md:hidden">
+     
+        <div className="image md:hidden  pb-60 bg-black">
          <ExportedImage src="/assets/jarimg.png"
          unoptimized={true}
          alt ="shivam"
-         width={420}
+         width={440}
          height={500}
-        objectFit="cover"  
-         
-         />
-        
+        objectFit="cover"       />      
         </div>
-      </div>
+     
 
       {/* Ui for mobile */}
-      <section className="flex flex-col items-center w-full justify-center min-h-screen bg-black py-12">
+      <section className="flex flex-col items-center w-full justify-center min-h-screen bg-black py-12 pb-40">
     <div className="text-center mb-12 space-y-4">
       <h1 className="text-5xl font-bold text-white">3x Flavours</h1>
     </div>
@@ -212,9 +209,6 @@ const Content = () => {
               </button>
             ))}
           </div>
-
-      
-
           {/* Flavor Details / Buy Now */}
           <div className="w-full p-8 flex flex-col items-center">
             <h3 className="text-2xl md:text-5xl font-bold text-white mb-6 text-center">
@@ -232,13 +226,6 @@ const Content = () => {
       </div>
     </div>
   </section>
-
-
-
-
-
-
-
 
       {/* Product 5 */}
       <section className="flex items-center justify-center bg-white scroll-animate">
@@ -282,8 +269,8 @@ const Content = () => {
     src="/assets/1.png"
     unoptimized={true}
     alt="shivam"
-    width={220}
-    height={100}
+    width={320}
+    height={200}
     objectFit="cover"
     className="block p-0 m-0 leading-none"
     
@@ -292,8 +279,8 @@ const Content = () => {
     src="/assets/2.png"
     unoptimized={true}
     alt="shivam"
-    width={220}
-    height={100}
+    width={320}
+    height={200}
     objectFit="cover"
     className="block p-0 m-0 leading-none"
    
