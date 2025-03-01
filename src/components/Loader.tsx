@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function Loader() {
   const [isExiting, setIsExiting] = useState(false);
   const text = "Survival Of Fittest";
+  const words = text.split(" "); // Split text into words
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,32 +18,23 @@ export default function Loader() {
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black transition-all duration-1000 ease-in-out"
       style={{
-        clipPath: isExiting ? "inset(0 0 100% 0)" : "inset(0 0 0 0)", // Changed clip-path values
+        clipPath: isExiting ? "inset(0 0 100% 0)" : "inset(0 0 0 0)", // Curtain effect
       }}
     >
-      <div className="inline-flex">
-        {text.split("").map((char, index) => {
-          if (char === " ") {
-            return (
-              <span key={index} className="inline-block" style={{ width: "1rem" }} />
-            );
-          }
-          return (
-            <span
-              key={index}
-              className={`text-white text-2xl md:text-4xl font-semibold ${
-                isExiting ? "opacity-0" : "animate-letter"
-              }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {char}
-            </span>
-          );
-        })}
+      <div className="inline-flex flex-wrap justify-center gap-2">
+        {words.map((word, index) => (
+          <span
+            key={index}
+            className="text-white text-2xl md:text-4xl font-semibold animate-word"
+            style={{ animationDelay: `${index * 0.5}s` }} // Delay for each word
+          >
+            {word}
+          </span>
+        ))}
       </div>
       
       <style jsx global>{`
-        @keyframes fadeInLetter {
+        @keyframes fadeInWord {
           0% {
             opacity: 0;
             transform: translateY(20px);
@@ -52,8 +44,10 @@ export default function Loader() {
             transform: translateY(0);
           }
         }
-        .animate-letter {
-          animation: fadeInLetter 0.5s forwards;
+        .animate-word {
+          opacity: 0; /* Start hidden */
+          transform: translateY(20px); /* Start position */
+          animation: fadeInWord 0.5s forwards; /* Apply animation */
         }
       `}</style>
     </div>
