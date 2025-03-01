@@ -22,7 +22,11 @@ const Content = () => {
     "/assets/Jar.png",
   ];
   
-
+  const flavorIcons = [
+    "/assets/icon1.png",
+    "/assets/icon2.png",
+    "/assets/icon3.png",
+  ];
   const [currentIndex, setCurrentIndex] = useState(0);
   
   
@@ -31,7 +35,7 @@ const Content = () => {
     <div className="flex flex-col items-center justify-center  min-h-screen">
            <section className="flex items-center justify-center bg-white scroll-animate md:hidden">
         <div className="md:w-full w-full p-4 flex flex-col justify-center items-center text-center" data-aos="fade-up" data-aos-delay="200">
-          <p className="text-2xl sm:text-3xl leading-relaxed font-bold text-black mt-28">
+          <p className="text-2xl sm:text-3xl leading-relaxed  text-black mt-28">
             Welcome to the Future of breakfast. Peros redefines peanut butter with a commitment to purity and wellness. Experience a new standard of taste and nutrition, crafted to energize your mornings and elevate your lifestyle.
           </p>
         </div>
@@ -53,8 +57,8 @@ const Content = () => {
       <section className="flex items-center justify-center bg-gradient-radial from-white via-blue-200 to-blue-400 h-screen scroll-animate hidden sm:flex">
         <div className="max-w-full space-x-16 flex flex-col md:flex-row w-full overflow-hidden">
           <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-right">
-            <h2 className="text-5xl font-bold text-green-800">Dark Chocolate</h2>
-            <h2 className="text-5xl font-bold text-green-800">Crunchy</h2>
+            <h2 className="text-5xl  text-green-800">Dark Chocolate</h2>
+            <h2 className="text-5xl  text-green-800">Crunchy</h2>
             <Link href={"/products"}>
             
             <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition" >
@@ -73,8 +77,8 @@ const Content = () => {
       <section className="flex items-center justify-center bg-gradient-radial from-white via-blue-200 to-blue-400 h-screen scroll-animate hidden sm:flex">
         <div className="max-w-full space-x-16 flex flex-col md:flex-row w-full overflow-hidden">
           <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-right" >
-            <h2 className="text-5xl font-bold text-green-800">Dark Chocolate</h2>
-            <h2 className="text-5xl font-bold text-green-800">Crunchy</h2>
+            <h2 className="text-5xl  text-green-800">Dark Chocolate</h2>
+            <h2 className="text-5xl  text-green-800">Crunchy</h2>
             <Link href={"/products"}>
             
             <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition" >
@@ -95,8 +99,8 @@ const Content = () => {
             <img src="/assets/classic.png" alt="Product 3" className="w-full h-full" />
           </div>
           <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start" data-aos="slide-left">
-            <h2 className="text-5xl font-bold text-green-800">Dark Chocolate</h2>
-            <h2 className="text-5xl font-bold text-green-800">Classic</h2>
+            <h2 className="text-5xl  text-green-800">Dark Chocolate</h2>
+            <h2 className="text-5xl  text-green-800">Classic</h2>
             <Link href={"/products"}>
             
             <button className="bg-gradient-to-r from-green-600 to-green-800 text-white py-3 px-8 my-8 font-semibold rounded-md uppercase transform hover:scale-105 transition" >
@@ -118,7 +122,7 @@ const Content = () => {
       />
     </div>
     <div className="md:w-1/2 w-full p-6 md:p-12 flex flex-col justify-center items-start space-y-4 md:space-y-6 mb-6 md:mb-12" data-aos="fade-up" >
-      <p className="text-xl md:text-2xl text-white items-center">
+      <p className="text-xl md:text-2xl font-bold text-white items-center">
         <u>The exclusivity</u>
       </p>
       <p className="text-lg md:text-xl leading-relaxed text-white">
@@ -145,7 +149,7 @@ const Content = () => {
         <div className="flex flex-col md:flex-row rounded-lg w-full overflow-hidden ">
       
           <div className="md:w-1/2 w-full p-8 flex flex-col justify-center items-start space-y-6 mb-12" data-aos="fade-up" >
-            <p className="text-2xl text-white items-center">
+            <p className="text-2xl font-bold text-white items-center">
               <u>Our Vision</u>
             </p>
             <p className="text-xl leading-relaxed text-white">
@@ -173,55 +177,61 @@ const Content = () => {
       </div>
 
       {/* Ui for mobile */}
-      <section className="flex flex-col items-center w-full  justify-center min-h-screen bg-black py-12">
-      
-      <div className="text-center mb-12 space-y-4">
-        <h1 className="text-5xl font-bold text-white">3x  Flavours</h1>
-       
-      </div>
+      <section className="flex flex-col items-center w-full justify-center min-h-screen bg-black py-12">
+    <div className="text-center mb-12 space-y-4">
+      <h1 className="text-5xl font-bold text-white">3x Flavours</h1>
+    </div>
 
-    
-      <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl px-4">
-      
-      
+    <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl px-4">
+      <div className="md:w-1/2 w-full p-8 flex flex-col items-center">
+        <div className="relative w-full max-w-md">
+          {/* Main Product Image */}
+          <img
+            src={images[currentIndex]}
+            alt="Flavor variant"
+            className="w-full h-auto object-cover rounded-lg transition-opacity duration-300"
+          />
 
-       
-        <div className="md:w-1/2 w-full p-8 flex flex-col items-center">
-          <div className="relative w-full max-w-md">
-            <img
-              src={images[currentIndex]}
-              alt="Flavor variant"
-              className="w-full h-auto object-cover rounded-lg transition-opacity duration-300"
-            />
-            
-         
-            <div className="flex justify-center space-x-3 mt-8">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    currentIndex === index ? 'bg-white' : 'bg-gray-500'
-                  }`}
+          {/* Flavor Icon Buttons */}
+          <div className="flex justify-center space-x-3 mt-8">
+            {flavorIcons.map((iconSrc, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`
+                  relative w-8 h-8 transition-all
+                  ${currentIndex === index ? "scale-105 opacity-100" : "opacity-50"}
+                `}
+                title={`Flavor ${index + 1}`}
+              >
+                <img
+                  src={iconSrc}
+                  alt={`Flavor ${index + 1}`}
+                  className="w-full h-full object-cover rounded-full"
                 />
-              ))}
-            </div>  <div className="w-full p-8 flex flex-col items-center">
-          <h3 className="text-2xl md:text-5xl font-bold text-white mb-6  text-center">
-            Dark Chocolate
-            Rs.299
-          </h3>
-          <Link href="/products">
-          
-          <button className="bg-white text-black py-2 px-6 text-lg font-semibold rounded-full hover:bg-gray-200 transition-colors text-center"
-          >
-            Buy Now
-          </button>
-          </Link>
-        </div>
+              </button>
+            ))}
+          </div>
+
+      
+
+          {/* Flavor Details / Buy Now */}
+          <div className="w-full p-8 flex flex-col items-center">
+            <h3 className="text-2xl md:text-5xl font-bold text-white mb-6 text-center">
+              Dark Chocolate
+              <br />
+              Rs.299
+            </h3>
+            <Link href="/products">
+              <button className="bg-white text-black py-2 px-6 text-lg font-semibold rounded-full hover:bg-gray-200 transition-colors text-center">
+                Buy Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
 
 
