@@ -7,36 +7,32 @@ export default function Loader() {
   const text = "Survival Of Fittest";
 
   useEffect(() => {
-    // Trigger exit animation after 3 seconds
     const timer = setTimeout(() => {
       setIsExiting(true);
-    }, 3000);
-
+    }, 2200); // Matches text animation duration
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-transform duration-1000 ${
-        isExiting ? "translate-y-[-100vh]" : ""
-      }`}
-      style={{ willChange: "transform" }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black transition-all duration-1000 ease-in-out"
+      style={{
+        clipPath: isExiting ? "inset(0 0 100% 0)" : "inset(0 0 0 0)", // Changed clip-path values
+      }}
     >
-      {/* Letter-by-letter container */}
       <div className="inline-flex">
         {text.split("").map((char, index) => {
-          // Insert a gap for spaces
           if (char === " ") {
             return (
               <span key={index} className="inline-block" style={{ width: "1rem" }} />
             );
           }
-
-          // Animate letters
           return (
             <span
               key={index}
-              className="text-white text-2xl md:text-4xl font-semibold animate-letter"
+              className={`text-white text-2xl md:text-4xl font-semibold ${
+                isExiting ? "opacity-0" : "animate-letter"
+              }`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {char}
@@ -44,8 +40,7 @@ export default function Loader() {
           );
         })}
       </div>
-
-      {/* Global styles for animations */}
+      
       <style jsx global>{`
         @keyframes fadeInLetter {
           0% {
@@ -58,7 +53,6 @@ export default function Loader() {
           }
         }
         .animate-letter {
-          opacity: 0;
           animation: fadeInLetter 0.5s forwards;
         }
       `}</style>

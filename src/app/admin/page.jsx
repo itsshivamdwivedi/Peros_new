@@ -1,7 +1,9 @@
 export default function Page(){
     return(
         <main>
-            <h1>Dashboard</h1>
+            <h2>
+                Welcome to the Admin Page
+            </h2>
         </main>
     )
 }
