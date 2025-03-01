@@ -1,94 +1,45 @@
-"use client"
+"use client";
 import { useState } from "react";
-import { ShoppingCart, UserCircle2, Menu, X } from "lucide-react";
+import { UserCircle2, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import LogoutButton from "./LogoutButton";
 import AuthContextProvider from "@/contexts/AuthContext";
 import HeaderClientButtons from "@/components/HeaderClientButtons";
-import { link } from "fs";
+import LogoutButton from "./LogoutButton";
 
-const Navbar = () => {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuList = [
     { name: "Home", link: "/" },
     { name: "Products", link: "/products" },
-    // { name: "Contact", link: "/contact-us" },
   ];
 
   return (
-    <nav className="sticky top-0 z-10 bg-white/90 backdrop-blur-md shadow-md flex justify-between items-center px-6 font-semibold">
-      <div className="flex items-center space-x-2">
-        <Link href="/">
-          <Image
-            src="/assets/logo/logo.png"
-            alt="Peros Logo"
-            priority
-            width={190}
-            height={150}
-          />
-        </Link>
-      </div>
+    <>
+      {/* NAVBAR */}
+      <nav className="fixed top-0 w-full z-30 bg-white/90 backdrop-blur-md shadow-md">
+        <div className="flex justify-between items-center px-4 md:px-6 py-2 md:py-4 font-semibold">
+          {/* Logo */}
+          <div className="flex items-center">
+            <Link href="/">
+              <Image
+                src="/assets/logo/logo.png"
+                alt="Peros Logo"
+                priority
+                width={100}
+                height={70}
+                className="md:w-[190px] md:h-[150px]"
+              />
+            </Link>
+          </div>
 
-      <div className="hidden md:flex items-center space-x-8">
-        {menuList.map((item, index) => (
-          <Link
-            key={index}
-            href={item.link}
-            className="text-black hover:text-[#D9F99D] transition"
-          >
-            {item.name}
-          </Link>
-        ))}
-        <Link
-          href="/products"
-          className="bg-black text-white px-4 py-2 rounded-md hover:bg-green-300 transition"
-        >
-          Buy
-        </Link>
-      </div>
-
-      {/* Icons */}
-      <div className="flex items-center space-x-4">
-        <AuthContextProvider>
-          <HeaderClientButtons />
-        </AuthContextProvider>
-        <Link href="/account">
-          <button
-            title="My Account"
-            className="h-8 w-8 flex justify-center items-center rounded-full hover:bg-gray-50"
-          >
-            <UserCircle2 size={28} />
-          </button>
-        </Link>
-        {/* <Link href="/cart">
-          <button className="h-8 w-8 flex justify-center items-center rounded-full hover:bg-gray-50">
-            <ShoppingCart size={34} />
-          </button>
-        </Link> */}
-        <AuthContextProvider>
-          <LogoutButton />
-        </AuthContextProvider>
-      </div>
-
-      <div className="md:hidden">
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 rounded-full hover:bg-gray-200 hover:text-[#D9F99D] transition"
-        >
-          {mobileMenuOpen ? <X size={34} /> : <Menu size={34} />}
-        </button>
-      </div>
-
-      {mobileMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white shadow-lg md:hidden">
-          <div className="flex flex-col items-center space-y-4 py-4">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8">
             {menuList.map((item, index) => (
               <Link
                 key={index}
                 href={item.link}
-                onClick={() => setMobileMenuOpen(false)}
                 className="text-black hover:text-[#D9F99D] transition"
               >
                 {item.name}
@@ -96,16 +47,98 @@ const Navbar = () => {
             ))}
             <Link
               href="/products"
-              onClick={() => setMobileMenuOpen(false)}
-              className="bg-[#D9F99D] text-black px-4 py-2 rounded-md hover:bg-green-300 transition"
+              className="bg-black text-white px-4 py-2 rounded-md hover:bg-green-300 transition"
             >
               Buy
             </Link>
           </div>
-        </div>
-      )}
-    </nav>
-  );
-};
 
-export default Navbar;
+          {/* Icons (logout removed for mobile menu) */}
+          <div className="flex items-center space-x-4 md:space-x-6">
+            <AuthContextProvider>
+              <HeaderClientButtons />
+            </AuthContextProvider>
+
+            {/* Account Icon */}
+            <Link href="/account">
+              <button
+                title="My Account"
+                className="flex justify-center items-center h-6 w-6 md:h-8 md:w-8"
+              >
+                <UserCircle2 size={22} />
+              </button>
+            </Link>
+
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(true)}
+                className="p-1 rounded-full hover:bg-gray-200 hover:text-[#D9F99D] transition"
+              >
+                <Menu size={24} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Push down page content so it's not behind fixed navbar */}
+      <div className="mt-[70px] md:mt-[90px]" />
+
+      {/* OVERLAY + SIDEBAR (Shown only if mobileMenuOpen) */}
+      {mobileMenuOpen && (
+        <>
+          {/* Semi-Transparent Overlay (covers entire screen, above navbar) */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-40 z-40"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+
+          {/* Slide-In Sidebar (right-aligned) */}
+          <div
+            className={`fixed top-0 right-0 h-screen w-64 bg-black text-white z-50 
+              transform ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}
+              transition-transform duration-300 ease-in-out`}
+          >
+            {/* Sidebar Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
+              <span className="text-lg font-semibold">Menu</span>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-white"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Sidebar Links */}
+            <div className="flex flex-col items-center space-y-6 py-6">
+              {menuList.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.link}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white hover:text-[#D9F99D] transition text-lg"
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <Link
+                href="/products"
+                onClick={() => setMobileMenuOpen(false)}
+                className="bg-[#D9F99D] text-black px-6 py-2 rounded-md hover:bg-green-300 transition"
+              >
+                Buy
+              </Link>
+
+              {/* Logout Button inside the sidebar */}
+              <AuthContextProvider>
+                <LogoutButton />
+              </AuthContextProvider>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
+}
