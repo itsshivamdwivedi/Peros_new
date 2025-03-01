@@ -10,6 +10,9 @@ export default {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+			spartan: ['"League Spartan"', 'sans-serif'],
+		  },
 		keyframes: {
 			"caret-blink": {
 			  "0%,70%,100%": { opacity: "1" },
